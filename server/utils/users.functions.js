@@ -1,13 +1,18 @@
+const bcrypt=require('bcrypt')
+
+//models
 const User=require('../models/users.model')
 
-const createUser=async(userDetails)=>{
+const signup=async(userDetails)=>{
     const {email,username,password,name,address,phoneNumber}=userDetails;
     try{
+        const salt=await bcrypt.genSalt(10)        
+        const hashedPassword=await bcrypt.hash(password,salt)
         const newUser={
             email,
             username,
             name,
-            password,
+            password:hashedPassword,
             address,
             phoneNumber
         };
@@ -19,6 +24,7 @@ const createUser=async(userDetails)=>{
     }
 }
 
+
 const getAllUsers=async()=>{
     try{
         const users=await User.find();
@@ -28,4 +34,4 @@ const getAllUsers=async()=>{
     }
 }
 
-module.exports={createUser,getAllUsers};
+module.exports={signup,getAllUsers};
