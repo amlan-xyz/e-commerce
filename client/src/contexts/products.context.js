@@ -1,0 +1,23 @@
+import { createContext,useContext,useReducer } from "react";
+
+//reducer
+import {productsReducer} from '../reducers/products.reducer'
+
+const ProductsContext=createContext();
+
+const initialState={
+    products:[],
+    filteredProducts:[],
+};
+
+export const ProductsProvider=({children})=>{
+    const [state,dispatch]=useReducer(productsReducer,initialState);
+
+    return(
+        <ProductsContext.Provider value={{state,dispatch}}>{children}</ProductsContext.Provider>
+    )
+}
+
+export const useProductsContext=()=>{
+    return useContext(ProductsContext);
+}

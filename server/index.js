@@ -2,8 +2,14 @@ require('dotenv').config()
 require('./db')
 const express=require('express');
 const app=express();
+const cors=require('cors');
 
 app.use(express.json());
+
+//cors
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
 
 //routes
 const productsRoutes=require('./routes/products.routes');
