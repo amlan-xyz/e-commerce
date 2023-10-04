@@ -8,6 +8,10 @@ const ProductsContext=createContext();
 const initialState={
     products:[],
     filteredProducts:[],
+    searchQuery:"",
+    sortHighToLow:null,
+    priceRange:0,
+    rating:0,
 };
 
 export const ProductsProvider=({children})=>{
