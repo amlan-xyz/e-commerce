@@ -3,7 +3,7 @@ export const authReducer = (state, action) => {
     case "LOGIN":
       return {
         ...state,
-        username: action.payload.username,
+        username: action.payload,
       };
     default:
       return state;

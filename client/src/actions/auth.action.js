@@ -10,5 +10,20 @@ export const loginUser = async (credentials) => {
     body: JSON.stringify(credentials),
   });
   const { data } = await response.json();
-  console.log(data);
+  localStorage.setItem("token", data.token);
+  return { username: data.username };
+};
+
+export const signupUser = async (userData) => {
+  const url = `${backend_api}/signup`;
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  });
+  const { data } = await response.json();
+  localStorage.setItem("token", data.token);
+  return { username: data.username };
 };
