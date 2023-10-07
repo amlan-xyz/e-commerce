@@ -7,19 +7,21 @@ import { loginUser } from "../../actions/auth.action";
 import { useAuthContext } from "../../contexts/auth.context";
 
 export const Login = () => {
-  const { dispatch } = useAuthContext();
+  const { state, dispatch } = useAuthContext();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    dispatch(loginUser({ username: username, password: password }));
+    const user = await loginUser({ username, password });
+    dispatch({ type: "LOGIN", payload: user.username });
     setUsername("");
     setPassword("");
   };
 
   return (
     <section className="login__section">
+      {state.username}
       <form onSubmit={handleLogin}>
         <label htmlFor="username">Username</label>
         <input
