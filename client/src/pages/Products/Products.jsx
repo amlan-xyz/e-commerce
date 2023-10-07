@@ -45,6 +45,7 @@ export const Products=()=>{
                     console.log(e.target.value)
                     dispatch({type:"FILTER_BY_PRICE_RANGE",payload:e.target.value})} }/>
 
+                <label>Rating</label>
                 <input type="checkbox" checked={state.rating===4} name="rating-4"  onChange={(e)=>dispatch({type:"FILTER_BY_RATING",payload:4})} />
                 <input type="checkbox" checked={state.rating===1} name="rating-0" onChange={(e)=>dispatch({type:"FILTER_BY_RATING",payload:1})} />
             <ul>
