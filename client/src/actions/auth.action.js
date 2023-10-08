@@ -11,7 +11,7 @@ export const loginUser = async (credentials) => {
   });
   const { data } = await response.json();
   localStorage.setItem("token", data.token);
-  return { username: data.username };
+  return data.user;
 };
 
 export const signupUser = async (userData) => {
@@ -25,5 +25,16 @@ export const signupUser = async (userData) => {
   });
   const { data } = await response.json();
   localStorage.setItem("token", data.token);
-  return { username: data.username };
+  return data.user;
+};
+
+export const fetchUserProfile = async () => {
+  const url = `${backend_api}/profile`;
+  const response = await fetch(url, {
+    headers: {
+      authorization: localStorage.getItem("token"),
+    },
+  });
+  const { data } = await response.json();
+  return data.user;
 };

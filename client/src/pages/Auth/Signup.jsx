@@ -12,7 +12,7 @@ export const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     const user = await signupUser({ ...form });
-    dispatch({ type: "LOGIN", payload: user.username });
+    dispatch({ type: "LOGIN", payload: user });
     setForm([]);
   };
   return (
