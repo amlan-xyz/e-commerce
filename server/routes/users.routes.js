@@ -6,6 +6,9 @@ const JWT_SECRET = process.env.JWT_SECRET;
 //models
 const User = require("../models/users.model");
 
+//middlewares
+const { authVerify } = require("../middlewares/auth-verify.middleware");
+
 //utils
 const {
   signup,
@@ -41,15 +44,27 @@ router.post("/signup", async (req, res) => {
     try {
       const newUser = await signup(userDetails);
       if (newUser) {
-        const token = jwt.sign({ userId: newUser._id }, JWT_SECRET, {
-          expiresIn: "24h",
+        const token = jwt.sign(
+          { userId: newUser._id, username: newUser.username },
+          JWT_SECRET,
+          {
+            expiresIn: "24h",
+          }
+        );
+        res.status(201).json({
+          message: "Signup successful",
+          data: {
+            token,
+            user: {
+              username: newUser.username,
+              name: newUser.username,
+              phoneNumber: newUser.phoneNumber,
+              address: newUser.address,
+              email: newUser.email,
+              profilePicture: newUser.profilePicture,
+            },
+          },
         });
-        res
-          .status(201)
-          .json({
-            message: "Signup successful",
-            data: { token, username: newUser.username },
-          });
       } else {
         res.status(400).json({ message: "Signup failed" });
       }
@@ -72,15 +87,29 @@ router.post("/login", async (req, res) => {
     try {
       const loggedInUser = await login(user, password);
       if (loggedInUser) {
-        const token = jwt.sign({ userId: loggedInUser._id }, JWT_SECRET, {
-          expiresIn: "24h",
+        const token = jwt.sign(
+          {
+            userId: loggedInUser._id,
+          },
+          JWT_SECRET,
+          {
+            expiresIn: "24h",
+          }
+        );
+        res.status(200).json({
+          message: "Logged In",
+          data: {
+            token,
+            user: {
+              username: loggedInUser.username,
+              name: loggedInUser.username,
+              phoneNumber: loggedInUser.phoneNumber,
+              address: loggedInUser.address,
+              email: loggedInUser.email,
+              profilePicture: loggedInUser.profilePicture,
+            },
+          },
         });
-        res
-          .status(200)
-          .json({
-            message: "Logged In",
-            data: { token, username: loggedInUser.username },
-          });
       } else {
         res.status(401).json({ message: "Incorrect Credentials" });
       }
@@ -90,12 +119,50 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.get("/profile", authVerify, async (req, res) => {
+  const { userId } = req.user;
+  try {
+    const user = await getUserById(userId);
+    if (user) {
+      res.status(200).json({
+        message: "User found",
+        data: {
+          user: {
+            username: user.username,
+            name: user.username,
+            phoneNumber: user.phoneNumber,
+            address: user.address,
+            email: user.email,
+            profilePicture: user.profilePicture,
+          },
+        },
+      });
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Interanl Server Error", error });
+  }
+});
+
 router.get("/:id", async (req, res) => {
   const userId = req.params.id;
   try {
     const user = await getUserById(userId);
     if (user) {
-      res.status(200).json({ message: "User found", data: user });
+      res.status(200).json({
+        message: "User found",
+        data: {
+          user: {
+            username: user.username,
+            name: user.username,
+            phoneNumber: user.phoneNumber,
+            address: user.address,
+            email: user.email,
+            profilePicture: user.profilePicture,
+          },
+        },
+      });
     } else {
       res.status(404).json({ message: "User not found" });
     }

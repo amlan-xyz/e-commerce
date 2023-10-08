@@ -4,6 +4,7 @@ import { useState } from "react";
 import { loginUser } from "../../actions/auth.action";
 
 //contex
+import { useLocation, useNavigate } from "react-router";
 import { useAuthContext } from "../../contexts/auth.context";
 
 export const Login = () => {
@@ -11,10 +12,14 @@ export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleLogin = async (e) => {
     e.preventDefault();
     const user = await loginUser({ username, password });
-    dispatch({ type: "LOGIN", payload: user.username });
+    dispatch({ type: "LOGIN", payload: user });
+    navigate(location?.state?.from?.pathname || "/");
     setUsername("");
     setPassword("");
   };
