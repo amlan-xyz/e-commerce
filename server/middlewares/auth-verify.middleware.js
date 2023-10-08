@@ -19,7 +19,7 @@ const extractUserId = (decodedToken) => {
 };
 
 const authVerify = (req, res, next) => {
-  const token = req.headers.userId;
+  const token = req.headers.authorization;
   try {
     const decodedToken = verifyToken(token);
     const userId = extractUserId(decodedToken);
