@@ -21,6 +21,7 @@ app.use(
 const productsRoutes = require("./routes/products.routes");
 const usersRoutes = require("./routes/users.routes");
 const cartRoutes = require("./routes/cart.routes");
+const { authVerify } = require("./middlewares/auth-verify.middleware");
 
 app.get("/", (req, res) => {
   res.send("Its working");
@@ -28,7 +29,7 @@ app.get("/", (req, res) => {
 
 app.use("/products", productsRoutes);
 app.use("/users", usersRoutes);
-app.use("/carts", cartRoutes);
+app.use("/carts", authVerify, cartRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ error: "Route not found" });
