@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useProductsContext } from "../../contexts/products.context";
 
 //actions
+import { addToCart } from "../../actions/cart.action";
 import { fetchProducts } from "../../actions/products.action";
 
 export const Products = () => {
@@ -16,6 +17,11 @@ export const Products = () => {
 
   const handleReset = () => {
     dispatch({ type: "RESET" });
+  };
+
+  const handleCart = async (productId) => {
+    const data = await addToCart(productId);
+    dispatch({ type: "ADD_TO_CART", payload: data });
   };
 
   useEffect(() => {
@@ -78,6 +84,7 @@ export const Products = () => {
           return (
             <li key={_id}>
               {name} || {price}
+              <button onClick={() => handleCart(_id)}>Add to cart</button>
             </li>
           );
         })}
