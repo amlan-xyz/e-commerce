@@ -43,7 +43,9 @@ const deleteCartItem = async (cartItemId, userId) => {
   try {
     const user = await User.findById(userId).populate("cart.item");
     const cartItems = user.cart;
-    const updatedCart = cartItems.filter(({ _id }) => _id === cartItemId);
+    const updatedCart = cartItems.filter(
+      ({ _id }) => _id.toHexString() !== cartItemId
+    );
     user.cart = updatedCart;
     await user.save();
     return user.cart;

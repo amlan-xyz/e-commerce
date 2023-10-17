@@ -36,5 +36,7 @@ export const fetchUserProfile = async () => {
     },
   });
   const { data } = await response.json();
-  return data.user;
+  if (response.status === 200) {
+    return data.user;
+  }
 };

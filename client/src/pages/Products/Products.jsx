@@ -6,6 +6,7 @@ import { useProductsContext } from "../../contexts/products.context";
 //actions
 import { addToCart } from "../../actions/cart.action";
 import { fetchProducts } from "../../actions/products.action";
+import { addToWishlist } from "../../actions/wishlist.action";
 
 export const Products = () => {
   const { state, dispatch } = useProductsContext();
@@ -22,6 +23,12 @@ export const Products = () => {
   const handleCart = async (productId) => {
     const data = await addToCart(productId);
     dispatch({ type: "ADD_TO_CART", payload: data });
+  };
+
+  const handleWishlist = async (productId) => {
+    dispatch({ type: "WISHLIST_LOADING" });
+    const item = addToWishlist(productId);
+    dispatch({ type: "ADD_TO_WISHLIST", payload: item });
   };
 
   useEffect(() => {
@@ -85,6 +92,9 @@ export const Products = () => {
             <li key={_id}>
               {name} || {price}
               <button onClick={() => handleCart(_id)}>Add to cart</button>
+              <button onClick={() => handleWishlist(_id)}>
+                Add to Wishlist
+              </button>
             </li>
           );
         })}
