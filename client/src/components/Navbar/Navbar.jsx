@@ -16,6 +16,7 @@ export const Navbar = () => {
       <NavLink to="/">Home</NavLink>
       <NavLink to="/products">Products</NavLink>
       <NavLink to="/cart">Cart</NavLink>
+      <NavLink to="/wishlist">Wishlist</NavLink>
       {state.isLoggedIn === true ? (
         <>
           <NavLink to="/profile">{state.user.username}</NavLink>

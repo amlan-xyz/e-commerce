@@ -1,5 +1,5 @@
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-
 //pages
 import { Login } from "./pages/Auth/Login";
 import { Signup } from "./pages/Auth/Signup";
@@ -12,9 +12,28 @@ import { Profile } from "./pages/Profile/Profile";
 import { Navbar } from "./components/Navbar/Navbar";
 
 //utils
+import { fetchUserProfile } from "./actions/auth.action";
+import { useAuthContext } from "./contexts/auth.context";
+import { Wishlist } from "./pages/Wishlist/Wishlist";
 import { RequiresAuth } from "./utils/auth";
 
 function App() {
+  const { dispatch } = useAuthContext();
+
+  const getUserDetails = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const user = await fetchUserProfile();
+      if (user) {
+        dispatch({ type: "LOGIN", payload: user });
+      }
+    }
+  };
+
+  useEffect(() => {
+    getUserDetails();
+  }, []);
+
   return (
     <div className="main__container">
       <Navbar />
@@ -41,6 +60,14 @@ function App() {
           element={
             <RequiresAuth>
               <Profile />
+            </RequiresAuth>
+          }
+        />
+        <Route
+          path="/wishlist"
+          element={
+            <RequiresAuth>
+              <Wishlist />
             </RequiresAuth>
           }
         />
