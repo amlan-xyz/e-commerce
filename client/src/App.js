@@ -39,14 +39,7 @@ function App() {
       <div className="main__container">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/shop"
-            element={
-              <RequiresAuth>
-                <Products />
-              </RequiresAuth>
-            }
-          />
+          <Route path="/shop" element={<Products />} />
           <Route
             path="/cart"
             element={
