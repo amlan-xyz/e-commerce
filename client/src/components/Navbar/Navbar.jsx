@@ -7,9 +7,8 @@ import {
   AiOutlineUserAdd,
 } from "react-icons/ai";
 import { BiLogIn, BiLogOut } from "react-icons/bi";
-import { FaBars } from "react-icons/fa";
-import { GiCupcake } from "react-icons/gi";
-import { NavLink } from "react-router-dom";
+import { FaBars, FaCandyCane } from "react-icons/fa";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/auth.context";
 import "./Navbar.css";
 
@@ -35,10 +34,12 @@ export const Navbar = () => {
     setToggleMenu(false);
   };
 
+  const navigate = useNavigate();
+
   return (
     <div className="navigation flex">
-      <header className="navigation__header">
-        Candyland <GiCupcake />
+      <header onClick={() => navigate("/")} className="navigation__header">
+        Candyland <FaCandyCane />
       </header>
       <nav>
         <button

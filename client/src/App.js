@@ -40,7 +40,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
-            path="/products"
+            path="/shop"
             element={
               <RequiresAuth>
                 <Products />

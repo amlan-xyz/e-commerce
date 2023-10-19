@@ -6,7 +6,8 @@
   --text-color: #042411;
   --background-color: #f1fdf6;
   --accent-color: #17ba56;
-  --shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  --shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 * {
   margin: 0;
@@ -20,6 +21,10 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+section {
+  /* max-width: 1024px; */
 }
 
 .icon {
@@ -36,4 +41,8 @@ ul {
 
 .no__underline {
   text-decoration: none;
+}
+
+.text__center {
+  text-align: center;
 }

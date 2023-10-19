@@ -6,10 +6,13 @@
   padding: 0 1rem;
   position: sticky;
   top: 0;
+  z-index: 2;
+  box-shadow: var(--shadow);
 }
 
 .navigation__header {
   font-weight: 600;
+  font-size: 1.3rem;
 }
 
 .primary__navigation {
@@ -28,6 +31,8 @@
   border: none;
   background-color: var(--secondary-color);
   font-weight: 600;
+  outline: none;
+  font-size: 1.3rem;
 }
 
 #show-nav.primary__navigation {
@@ -38,6 +43,7 @@
 .navigation__link {
   display: flex;
   align-items: center;
+  font-size: 1.2rem;
 }
 
 .navigation__icon {
@@ -49,6 +55,10 @@
     display: none;
   }
 
+  .navigation__header {
+    font-size: 1.4rem;
+  }
+
   .primary__navigation {
     position: sticky;
     top: 0;
@@ -56,5 +66,25 @@
     margin-top: 0;
     padding: 0;
     transition: none;
+    gap: 1rem;
+  }
+  .navigation__icon {
+    margin-left: 0.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navigation {
+    padding: 0 3rem;
+  }
+
+  .primary__navigation {
+    gap: 1.5rem;
+  }
+  .navigation__icon {
+    margin-left: 0.3rem;
+  }
+  .navigation__item {
+    font-size: 1.2rem;
   }
 }
