@@ -1,4 +1,4 @@
-const backend_api = "http://localhost:3001/users";
+const backend_api = "https://e-commerce-backend.theweird0ne.repl.co/users";
 
 export const loginUser = async (credentials) => {
   try {

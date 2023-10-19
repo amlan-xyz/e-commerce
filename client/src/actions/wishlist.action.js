@@ -1,4 +1,4 @@
-const url = "http://localhost:3001/wishlist";
+const url = "https://e-commerce-backend.theweird0ne.repl.co/wishlist";
 
 export const addToWishlist = async (productId) => {
   try {
