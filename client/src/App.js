@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import "./App.css";
 //pages
 import { Login } from "./pages/Auth/Login";
 import { Signup } from "./pages/Auth/Signup";
@@ -16,10 +17,8 @@ import { fetchUserProfile } from "./actions/auth.action";
 import { useAuthContext } from "./contexts/auth.context";
 import { Wishlist } from "./pages/Wishlist/Wishlist";
 import { RequiresAuth } from "./utils/auth";
-
 function App() {
   const { dispatch } = useAuthContext();
-
   const getUserDetails = async () => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -35,45 +34,47 @@ function App() {
   }, []);
 
   return (
-    <div className="main__container">
+    <div className="main">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/products"
-          element={
-            <RequiresAuth>
-              <Products />
-            </RequiresAuth>
-          }
-        />
-        <Route
-          path="/cart"
-          element={
-            <RequiresAuth>
-              <Cart />
-            </RequiresAuth>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <RequiresAuth>
-              <Profile />
-            </RequiresAuth>
-          }
-        />
-        <Route
-          path="/wishlist"
-          element={
-            <RequiresAuth>
-              <Wishlist />
-            </RequiresAuth>
-          }
-        />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
+      <div className="main__container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/products"
+            element={
+              <RequiresAuth>
+                <Products />
+              </RequiresAuth>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <RequiresAuth>
+                <Cart />
+              </RequiresAuth>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <RequiresAuth>
+                <Profile />
+              </RequiresAuth>
+            }
+          />
+          <Route
+            path="/wishlist"
+            element={
+              <RequiresAuth>
+                <Wishlist />
+              </RequiresAuth>
+            }
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+      </div>
     </div>
   );
 }
