@@ -5,6 +5,7 @@ import { loginUser } from "../../actions/auth.action";
 
 //contex
 import { useLocation, useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import { useAuthContext } from "../../contexts/auth.context";
 
 export const Login = () => {
@@ -44,6 +45,7 @@ export const Login = () => {
         />
         <button type="submit">Login</button>
       </form>
+      <Link to="/signup">Signup</Link>
     </section>
   );
 };

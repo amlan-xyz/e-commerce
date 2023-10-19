@@ -1,0 +1,11 @@
+.main {
+  background-color: var(--background-color);
+  font-size: 16px;
+}
+
+.main__container {
+  min-height: 90vh;
+}
+
+@media (min-width: 768px) {
+}
