@@ -1,4 +1,4 @@
-const url = "http://localhost:3001/carts";
+const url = "https://e-commerce-backend.theweird0ne.repl.co/carts";
 
 export const fetchCart = async () => {
   try {

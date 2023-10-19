@@ -1,4 +1,4 @@
-const backend_api = "http://localhost:3001";
+const backend_api = "https://e-commerce-backend.theweird0ne.repl.co";
 
 export const fetchProducts = async () => {
   try {
