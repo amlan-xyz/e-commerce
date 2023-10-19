@@ -4,9 +4,11 @@ import { useEffect } from "react";
 import { useProductsContext } from "../../contexts/products.context";
 
 //actions
-import { addToCart } from "../../actions/cart.action";
 import { fetchProducts } from "../../actions/products.action";
-import { addToWishlist } from "../../actions/wishlist.action";
+
+//components
+import { Product } from "../../components/Product/Product";
+import "./Products.css";
 
 export const Products = () => {
   const { state, dispatch } = useProductsContext();
@@ -16,88 +18,20 @@ export const Products = () => {
     dispatch({ type: "FETCH_PRODUCTS", payload: products });
   };
 
-  const handleReset = () => {
-    dispatch({ type: "RESET" });
-  };
-
-  const handleCart = async (productId) => {
-    const data = await addToCart(productId);
-    dispatch({ type: "ADD_TO_CART", payload: data });
-  };
-
-  const handleWishlist = async (productId) => {
-    dispatch({ type: "WISHLIST_LOADING" });
-    const item = addToWishlist(productId);
-    dispatch({ type: "ADD_TO_WISHLIST", payload: item });
-  };
-
   useEffect(() => {
     getProducts();
   }, []);
 
   return (
     <section className="products__section">
-      <h1>Products page</h1>
-      <button onClick={handleReset}>Reset</button>
-
-      <label htmlFor="search">Search</label>
-      <input
-        id="search"
-        value={state.searchQuery}
-        type="text"
-        onChange={(e) => dispatch({ type: "SEARCH", payload: e.target.value })}
-      />
-
-      <label htmlFor="">Sort Price High To low</label>
-      <input
-        type="radio"
-        checked={state.sortHighToLow === true}
-        onChange={(e) => dispatch({ type: "SORT_BY_PRICE", payload: true })}
-      />
-      <label htmlFor="">Sort Price Low to High</label>
-      <input
-        checked={state.sortHighToLow === false}
-        type="radio"
-        name="sortPrice"
-        onChange={(e) => dispatch({ type: "SORT_BY_PRICE", payload: false })}
-      />
-
-      <input
-        type="range"
-        min="0"
-        max="10000"
-        onChange={(e) => {
-          console.log(e.target.value);
-          dispatch({ type: "FILTER_BY_PRICE_RANGE", payload: e.target.value });
-        }}
-      />
-
-      <label>Rating</label>
-      <input
-        type="checkbox"
-        checked={state.rating === 4}
-        name="rating-4"
-        onChange={(e) => dispatch({ type: "FILTER_BY_RATING", payload: 4 })}
-      />
-      <input
-        type="checkbox"
-        checked={state.rating === 1}
-        name="rating-0"
-        onChange={(e) => dispatch({ type: "FILTER_BY_RATING", payload: 1 })}
-      />
-      <ul>
-        {state.filteredProducts.map((product) => {
-          const { _id, name, price } = product;
-          return (
-            <li key={_id}>
-              {name} || {price}
-              <button onClick={() => handleCart(_id)}>Add to cart</button>
-              <button onClick={() => handleWishlist(_id)}>
-                Add to Wishlist
-              </button>
-            </li>
-          );
-        })}
+      <h2 className="text__center">Pick your candies</h2>
+      {/* <Sidebar /> */}
+      <ul className="products__list flex">
+        {state.filteredProducts.map((product) => (
+          <li key={product._id} className="products__list-item">
+            <Product {...product} />
+          </li>
+        ))}
       </ul>
     </section>
   );

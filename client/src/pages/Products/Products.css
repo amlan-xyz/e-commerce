@@ -1,0 +1,8 @@
+.products__section {
+  padding: 1rem;
+}
+
+.products__list {
+  flex-direction: column;
+  gap: 1.5rem;
+}
