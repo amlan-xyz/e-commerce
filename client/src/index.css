@@ -35,6 +35,10 @@ ul {
   display: flex;
 }
 
+.grid {
+  display: grid;
+}
+
 .no__underline {
   text-decoration: none;
 }
@@ -42,4 +46,13 @@ ul {
 .text__center {
   text-align: center;
   font-weight: 400;
+}
+
+.heart__empty {
+  font-size: 1.5rem;
+}
+
+.heart__filled {
+  font-size: 1.5rem;
+  fill: red;
 }

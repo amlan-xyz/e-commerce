@@ -1,8 +1,150 @@
 .products__section {
+  margin-top: 1.5rem;
   padding: 1rem;
 }
 
+.products__section h2 {
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+.products__section-header {
+  justify-content: space-between;
+  text-align: center;
+}
+
+.products__header {
+  display: grid;
+  grid-template-areas:
+    "heading heading filter"
+    "search search search";
+}
+
+.products__header h2 {
+  grid-area: heading;
+}
+
+.search__bar {
+  grid-area: search;
+}
+
+.show__filter {
+  grid-area: filter;
+  height: 30px;
+  background: none;
+  color: var(--accent-color);
+  font-size: 1rem;
+  border: none;
+  padding-left: 50%;
+  text-decoration: underline;
+}
+
+.show__filter:hover {
+  color: red;
+}
+
+.search__bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 1rem;
+  height: 35px;
+}
+.search__bar input {
+  padding: 0.2rem 0.5rem;
+  border: none;
+  outline: none;
+  background-color: var(--background-color);
+  width: 80%;
+}
+
+.search__btn {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  display: flex;
+  text-align: center;
+  margin-left: 0.5rem;
+}
+
 .products__list {
-  flex-direction: column;
-  gap: 1.5rem;
+  margin-top: 2rem;
+  gap: 3rem;
+  place-items: center;
+}
+
+.modal_wrapper {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(189, 189, 189, 0.9);
+}
+
+.modal_container {
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--background-color);
+  width: 80%;
+}
+
+.modal_close-btn {
+  position: absolute;
+  right: 0;
+  margin-right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  transform: translateY(10px);
+}
+
+@media (min-width: 768px) {
+  .products__section {
+    margin: 2rem;
+    grid-template-areas: "content content content";
+  }
+
+  .products__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1440px) {
+  .show__filter {
+    display: none;
+  }
+
+  .products__section {
+    grid-template-areas: "sidebar content content";
+  }
+
+  .products__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .products__sidebar {
+    position: fixed;
+    top: 13%;
+    grid-area: sidebar;
+    position: fixed;
+    /* outline: solid; */
+  }
+
+  .products__content {
+    margin-left: 350px;
+    /* min-width: 768px; */
+    grid-area: content;
+  }
+
+  .products__list {
+    grid-template-columns: repeat(3, auto);
+  }
+  .search__bar {
+    width: 50%;
+  }
 }
