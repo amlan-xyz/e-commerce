@@ -5,7 +5,7 @@ import { useProductsContext } from "../../contexts/products.context";
 //actions
 import { addToCart } from "../../actions/cart.action";
 import { addToWishlist } from "../../actions/wishlist.action";
-export const Product = ({ _id, name, rating, category, price }) => {
+export const Product = ({ _id, name, rating, category, price, image }) => {
   const { dispatch } = useProductsContext();
   const handleCart = async (productId) => {
     const data = await addToCart(productId);
@@ -19,11 +19,7 @@ export const Product = ({ _id, name, rating, category, price }) => {
   };
   return (
     <div className="product">
-      <img
-        className="product__img"
-        src="/candies/lollipop/heart.jpg"
-        alt="A violet candy"
-      />
+      <img className="product__img" src={image} alt="A violet candy" />
       <div className="product__body flex">
         <div className="product__header flex">
           <h3>{name}</h3>

@@ -35,7 +35,14 @@ export const Products = () => {
           <h2>/ Our products </h2>
           <div className="search__bar flex">
             <AiOutlineSearch />
-            <input type="text" placeholder="Search....." />
+            <input
+              type="text"
+              onChange={(e) =>
+                dispatch({ type: "SEARCH", payload: e.target.value })
+              }
+              value={state.searchQuery}
+              placeholder="Search....."
+            />
           </div>
           <button onClick={() => setShowFilter(true)} className="show__filter">
             Filters
