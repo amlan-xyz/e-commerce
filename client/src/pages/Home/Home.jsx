@@ -1,5 +1,6 @@
 import { AiOutlineShopping } from "react-icons/ai";
 import { useNavigate } from "react-router";
+//actions
 import "./Home.css";
 export const Home = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export const Home = () => {
         <ul className="home__categories-list flex">
           <li
             onClick={() => {
-              navigate("/shop");
+              navigate("/shop/#candies");
             }}
             className="home__categories-item"
           >
@@ -34,7 +35,7 @@ export const Home = () => {
           </li>
           <li
             onClick={() => {
-              navigate("/shop");
+              navigate("/shop/#doughnuts");
             }}
             className="home__categories-item"
           >
@@ -47,7 +48,7 @@ export const Home = () => {
           </li>
           <li
             onClick={() => {
-              navigate("/shop");
+              navigate("/shop/#cupcakes");
             }}
             className="home__categories-item"
           >

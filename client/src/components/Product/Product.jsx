@@ -18,7 +18,7 @@ export const Product = ({ _id, name, rating, category, price, image }) => {
     dispatch({ type: "ADD_TO_WISHLIST", payload: item });
   };
   return (
-    <div className="product">
+    <div className="product " id={category}>
       <img className="product__img" src={image} alt="A violet candy" />
       <div className="product__body flex">
         <div className="product__header flex">
