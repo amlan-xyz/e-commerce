@@ -10,6 +10,7 @@ import { BiLogIn, BiLogOut } from "react-icons/bi";
 import { FaBars, FaCandyCane } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/auth.context";
+import { useCartContext } from "../../contexts/cart.context";
 import "./Navbar.css";
 
 const getActiveStyle = ({ isActive }) => ({
@@ -19,6 +20,7 @@ export const Navbar = () => {
   const { state } = useAuthContext();
   const [toggleMenu, setToggleMenu] = useState(false);
 
+  const carts = useCartContext();
   const handleToggle = () => {
     setToggleMenu(!toggleMenu);
   };
@@ -72,7 +74,8 @@ export const Navbar = () => {
               style={getActiveStyle}
             >
               Cart
-              <AiOutlineShoppingCart className="navigation__icon" />
+              <AiOutlineShoppingCart className="navigation__icon" />(
+              {carts.state.cart.length})
             </NavLink>
           </li>
           <li className="navigation__item">

@@ -1,12 +1,20 @@
 import { AiFillStar, AiOutlineHeart } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import "./Product.css";
 //context
 import { useProductsContext } from "../../contexts/products.context";
 //actions
 import { addToCart } from "../../actions/cart.action";
 import { addToWishlist } from "../../actions/wishlist.action";
+import { useCartContext } from "../../contexts/cart.context";
+
 export const Product = ({ _id, name, rating, category, price, image }) => {
   const { dispatch } = useProductsContext();
+
+  const { state } = useCartContext();
+
+  const navigate = useNavigate();
+
   const handleCart = async (productId) => {
     const data = await addToCart(productId);
     dispatch({ type: "ADD_TO_CART", payload: data });
@@ -17,6 +25,7 @@ export const Product = ({ _id, name, rating, category, price, image }) => {
     const item = addToWishlist(productId);
     dispatch({ type: "ADD_TO_WISHLIST", payload: item });
   };
+
   return (
     <div className="product " id={category}>
       <img className="product__img" src={image} alt="A violet candy" />
@@ -37,9 +46,18 @@ export const Product = ({ _id, name, rating, category, price, image }) => {
           {rating} <AiFillStar className="fill__primary" /> | {category}
         </small>
         <p>&#8377; {price}</p>
-        <button className="product__cart-btn" onClick={() => handleCart(_id)}>
-          Add to cart
-        </button>
+        {state.cart.find((cartItem) => cartItem.item.name === name) ? (
+          <button
+            className="product__cart-btn"
+            onClick={() => navigate("/cart")}
+          >
+            View Cart
+          </button>
+        ) : (
+          <button className="product__cart-btn" onClick={() => handleCart(_id)}>
+            Add to cart
+          </button>
+        )}
       </div>
     </div>
   );

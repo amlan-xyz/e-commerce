@@ -87,3 +87,14 @@ ul {
 button:hover {
   cursor: pointer;
 }
+
+.delete__btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  text-align: end;
+}
+
+.delete__icon {
+  fill: red;
+}
