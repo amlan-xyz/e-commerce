@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { AiFillDelete, AiFillStar } from "react-icons/ai";
+import { AiFillStar, AiOutlineDelete } from "react-icons/ai";
 
 //context
 import { useCartContext } from "../../contexts/cart.context";
@@ -63,7 +63,7 @@ export const Cart = () => {
                         className="delete__btn"
                         onClick={() => removeCartItem(_id)}
                       >
-                        <AiFillDelete className="delete__icon" />
+                        <AiOutlineDelete className="delete__icon" />
                       </button>
                     </div>
                     <small>
