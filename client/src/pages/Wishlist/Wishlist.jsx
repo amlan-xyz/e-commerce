@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import {
-  deleteItemFromWishlist,
-  fetchWishlist,
-} from "../../actions/wishlist.action";
+import { fetchWishlist } from "../../actions/wishlist.action";
 import { useWishlistContenxt } from "../../contexts/wishlist.context";
+
+import { Product } from "../../components/Product/Product";
+import "./Wishlist.css";
+
 export const Wishlist = () => {
   const { state, dispatch } = useWishlistContenxt();
 
@@ -11,18 +12,6 @@ export const Wishlist = () => {
     dispatch({ type: "WISHLIST_LOADING" });
     const wishlist = await fetchWishlist();
     dispatch({ type: "FETCH_WISHLIST", payload: wishlist });
-  };
-
-  const removeFromWishlist = async (productId) => {
-    dispatch({ type: "WISHLIST_LOADING" });
-    const deletedItem = await deleteItemFromWishlist(productId);
-    console.log(deletedItem);
-    dispatch({
-      type: "REMOVE_FROM_WISHLIST",
-      payload: {
-        id: deletedItem._id,
-      },
-    });
   };
 
   useEffect(() => {
@@ -34,23 +23,20 @@ export const Wishlist = () => {
       {state.loading === true ? (
         "Loading..."
       ) : (
-        <>
-          <h1>Wishlist Page</h1>
+        <div className="wishlist__body">
+          <h1 className="text__center">Wishlist Page</h1>
           <ul className="wishlist">
             {state.wishlist &&
               state.wishlist.map((item) => {
-                const { _id, name } = item;
+                const { _id } = item;
                 return (
-                  <li key={_id}>
-                    {name}
-                    <button onClick={() => removeFromWishlist(_id)}>
-                      Remove from Wishlist
-                    </button>
+                  <li className="" key={_id}>
+                    <Product {...item} />
                   </li>
                 );
               })}
           </ul>
-        </>
+        </div>
       )}
     </div>
   );

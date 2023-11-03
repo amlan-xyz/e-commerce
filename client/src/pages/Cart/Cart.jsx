@@ -11,11 +11,17 @@ import {
   updateCart,
 } from "../../actions/cart.action";
 
+import { addToWishlist } from "../../actions/wishlist.action";
+
 import { useNavigate } from "react-router";
+import { useWishlistContenxt } from "../../contexts/wishlist.context";
 import "./Cart.css";
 
 export const Cart = () => {
   const { state, dispatch } = useCartContext();
+  const wishlistContext = useWishlistContenxt();
+
+  const wishlists = wishlistContext.state.wishlist;
 
   const navigate = useNavigate();
 
@@ -35,6 +41,12 @@ export const Cart = () => {
       type: "UPDATE_QUANTITY",
       payload: { id: itemId, qty: value },
     });
+  };
+
+  const moveToWishlist = async (itemId, product) => {
+    const item = addToWishlist(product._id);
+    dispatch({ type: "ADD_TO_WISHLIST", payload: item });
+    removeCartItem(itemId);
   };
 
   useEffect(() => {
@@ -89,7 +101,18 @@ export const Cart = () => {
                         +
                       </button>
                     </div>
-                    <button className="submit__btn">Move to Wishlist</button>
+                    {wishlists.find(({ _id }) => _id === item._id) ? (
+                      <button id="disabled" disabled className="submit__btn">
+                        Already in Wishlist
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => moveToWishlist(_id, item)}
+                        className="submit__btn"
+                      >
+                        Move to Wishlist
+                      </button>
+                    )}
                   </div>
                 </li>
               );

@@ -1,0 +1,36 @@
+.wishlist__container {
+  margin: 2rem 3rem;
+}
+
+.wishlist__body {
+  margin-top: 2rem;
+}
+
+.wishlist {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  column-gap: 2rem;
+  row-gap: 3rem;
+}
+
+@media (max-width: 1024px) {
+  .wishlist {
+    grid-template-columns: repeat(3, auto);
+  }
+}
+
+@media (max-width: 768px) {
+  .wishlist {
+    grid-template-columns: repeat(2, auto);
+  }
+}
+
+@media (max-width: 768px) {
+  .wishlist {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
