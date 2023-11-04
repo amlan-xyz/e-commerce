@@ -99,3 +99,20 @@ button:hover {
 .delete__icon {
   fill: red;
 }
+
+.alt__btn {
+  padding: 0.5rem 0.8rem;
+  border: none;
+  box-shadow: var(--shadow);
+  background-color: var(--secondary-color);
+  font-size: 1rem;
+  color: var(--accent-color);
+}
+
+.primary__btn {
+  background-color: var(--primary-color);
+  border: none;
+  box-shadow: var(--shadow-alt);
+  padding: 0.7rem 1rem;
+  width: 100%;
+}

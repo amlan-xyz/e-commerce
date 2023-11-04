@@ -23,6 +23,7 @@ import { RequiresAuth } from "./utils/auth";
 import { useCartContext } from "./contexts/cart.context";
 
 import { useWishlistContenxt } from "./contexts/wishlist.context";
+import { Checkout } from "./pages/Checkout/Checkout";
 function App() {
   const { dispatch } = useAuthContext();
   const wishlistContext = useWishlistContenxt();
@@ -73,6 +74,14 @@ function App() {
             element={
               <RequiresAuth>
                 <Wishlist />
+              </RequiresAuth>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <RequiresAuth>
+                <Checkout />
               </RequiresAuth>
             }
           />

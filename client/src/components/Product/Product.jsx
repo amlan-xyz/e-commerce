@@ -90,7 +90,7 @@ export const Product = ({ _id, name, rating, category, price, image }) => {
         <p>&#8377; {price}</p>
         {carts && carts.find((cart) => cart.item._id === _id) ? (
           <button
-            className="product__cart-btn"
+            className="product__cart-btn--alt"
             onClick={() => navigate("/cart")}
           >
             View Cart
@@ -100,9 +100,6 @@ export const Product = ({ _id, name, rating, category, price, image }) => {
             Add to cart
           </button>
         )}
-        {/* <button className="product__cart-btn" onClick={() => handleCart(_id)}>
-          Add to cart
-        </button> */}
       </div>
     </div>
   );

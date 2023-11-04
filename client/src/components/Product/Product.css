@@ -34,7 +34,17 @@
   padding: 0.8rem;
   background-color: var(--primary-color);
   border: none;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-alt);
+}
+
+.product__cart-btn--alt {
+  margin-top: 0.5rem;
+  padding: 0.8rem;
+  background-color: var(--background-color);
+  border: none;
+  box-shadow: var(--shadow-alt);
+  color: var(--accent-color);
+  font-weight: 600;
 }
 
 .product__body small {
