@@ -27,7 +27,7 @@ export const productsReducer = (state, action) => {
       return {
         ...state,
         priceRange: action.payload,
-        filteredProducts: state.filteredProducts.filter(
+        filteredProducts: state.products.filter(
           ({ price }) => price >= action.payload
         ),
       };
@@ -43,7 +43,7 @@ export const productsReducer = (state, action) => {
       return {
         ...state,
         category: action.payload,
-        filteredProducts: state.filteredProducts.filter(
+        filteredProducts: state.products.filter(
           ({ category }) => category === action.payload
         ),
       };
