@@ -14,17 +14,29 @@ import { Navbar } from "./components/Navbar/Navbar";
 
 //utils
 import { fetchUserProfile } from "./actions/auth.action";
+import { fetchCart } from "./actions/cart.action";
+import { fetchWishlist } from "./actions/wishlist.action";
 import { useAuthContext } from "./contexts/auth.context";
 import { Wishlist } from "./pages/Wishlist/Wishlist";
 import { RequiresAuth } from "./utils/auth";
+
+import { useCartContext } from "./contexts/cart.context";
+
+import { useWishlistContenxt } from "./contexts/wishlist.context";
 function App() {
   const { dispatch } = useAuthContext();
+  const wishlistContext = useWishlistContenxt();
+  const cartContext = useCartContext();
   const getUserDetails = async () => {
     const token = localStorage.getItem("token");
     if (token) {
       const user = await fetchUserProfile();
       if (user) {
         dispatch({ type: "LOGIN", payload: user });
+        const cart = await fetchCart();
+        cartContext.dispatch({ type: "FETCH_CART", payload: cart });
+        const wishlist = await fetchWishlist();
+        wishlistContext.dispatch({ type: "FETCH_WISHLIST", payload: wishlist });
       }
     }
   };

@@ -27,9 +27,9 @@ router.post("/:product_id", async (req, res) => {
   const productId = req.params.product_id;
   const { userId } = req.user;
   try {
-    const updatedCart = await addToCart(productId, userId);
-    if (updatedCart) {
-      res.status(201).json({ message: "Added to Cart", data: updatedCart });
+    const cartItem = await addToCart(productId, userId);
+    if (cartItem) {
+      res.status(201).json({ message: "Added to Cart", data: cartItem });
     } else {
       res.status(400).json({ message: "Adding to cart failed" });
     }

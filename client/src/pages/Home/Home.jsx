@@ -1,9 +1,24 @@
+import { useEffect } from "react";
 import { AiOutlineShopping } from "react-icons/ai";
 import { useNavigate } from "react-router";
+import { fetchProducts } from "../../actions/products.action";
 //actions
+
+import { useProductsContext } from "../../contexts/products.context";
 import "./Home.css";
 export const Home = () => {
   const navigate = useNavigate();
+  const { dispatch } = useProductsContext();
+
+  const getProducts = async () => {
+    const products = await fetchProducts();
+    dispatch({ type: "FETCH_PRODUCTS", payload: products });
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   return (
     <div className="home">
       <section className="hero flex">

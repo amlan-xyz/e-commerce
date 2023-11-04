@@ -8,7 +8,7 @@ const addToCart = async (productId, userId) => {
     };
     user.cart.push(cartItem);
     await user.save();
-    return user.cart;
+    return cartItem;
   } catch (error) {
     console.error("Failed to add item to cart", error);
   }

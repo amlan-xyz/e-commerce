@@ -11,6 +11,7 @@ import { FaBars, FaCandyCane } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/auth.context";
 import { useCartContext } from "../../contexts/cart.context";
+import { useWishlistContenxt } from "../../contexts/wishlist.context";
 import "./Navbar.css";
 
 const getActiveStyle = ({ isActive }) => ({
@@ -24,6 +25,8 @@ export const Navbar = () => {
   const handleToggle = () => {
     setToggleMenu(!toggleMenu);
   };
+
+  const wishlists = useWishlistContenxt();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -86,7 +89,8 @@ export const Navbar = () => {
               style={getActiveStyle}
             >
               Wishlist
-              <AiOutlineHeart className="navigation__icon" />
+              <AiOutlineHeart className="navigation__icon" /> (
+              {wishlists.state.wishlist.length})
             </NavLink>
           </li>
           {state.isLoggedIn ? (
