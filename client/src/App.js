@@ -22,6 +22,7 @@ import { RequiresAuth } from "./utils/auth";
 
 import { useCartContext } from "./contexts/cart.context";
 
+import { Footer } from "./components/Footer/Footer";
 import { useWishlistContenxt } from "./contexts/wishlist.context";
 import { Checkout } from "./pages/Checkout/Checkout";
 function App() {
@@ -89,6 +90,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
         </Routes>
       </div>
+      <Footer />
     </div>
   );
 }
