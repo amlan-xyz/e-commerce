@@ -77,8 +77,8 @@ export const Navbar = () => {
               style={getActiveStyle}
             >
               Cart
-              <AiOutlineShoppingCart className="navigation__icon" />(
-              {carts.state.cart.length})
+              <AiOutlineShoppingCart className="navigation__icon" />
+              {carts.state.cart && <>({carts.state.cart.length})</>}
             </NavLink>
           </li>
           <li className="navigation__item">
@@ -89,8 +89,10 @@ export const Navbar = () => {
               style={getActiveStyle}
             >
               Wishlist
-              <AiOutlineHeart className="navigation__icon" /> (
-              {wishlists.state.wishlist.length})
+              <AiOutlineHeart className="navigation__icon" />
+              {wishlists.state.wishlist && (
+                <>({wishlists.state.wishlist.length})</>
+              )}
             </NavLink>
           </li>
           {state.isLoggedIn ? (
