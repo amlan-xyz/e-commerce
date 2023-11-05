@@ -48,6 +48,7 @@
 }
 
 .home__categories p {
+  margin-top: 1rem;
   text-align: center;
 }
 
@@ -61,13 +62,11 @@
 .home__categories-item {
   width: 280px;
   height: 380px;
-  /* box-shadow: var(--shadow); */
-  padding: 1rem;
+  box-shadow: var(--shadow);
 }
 
 .home__categories-item h3 {
   font-weight: 400;
-  text-decoration-style: wavy;
 }
 
 .home__categories-img {

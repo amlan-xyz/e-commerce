@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { fetchProducts } from "../../actions/products.action";
 //actions
 
+import { TopProducts } from "../../components/Top3Products.jsx/TopProducts";
 import { useProductsContext } from "../../contexts/products.context";
 import "./Home.css";
 export const Home = () => {
@@ -31,51 +32,7 @@ export const Home = () => {
           </button>
         </div>
       </section>
-      <section className="home__categories flex">
-        <h2 className="text__center">Our Categories</h2>
-        <p>Select from our awesome collection of different items</p>
-        <ul className="home__categories-list flex">
-          <li
-            onClick={() => {
-              navigate("/shop/#candies");
-            }}
-            className="home__categories-item"
-          >
-            <img
-              className="home__categories-img"
-              src="/candies/lollipop/lolipop.jpg"
-              alt="candy cane"
-            />
-            <h3 className="text__center">Candies</h3>
-          </li>
-          <li
-            onClick={() => {
-              navigate("/shop/#doughnuts");
-            }}
-            className="home__categories-item"
-          >
-            <img
-              className="home__categories-img"
-              src="/candies/doughnuts/cream.jpg"
-              alt="doughnut"
-            />
-            <h3 className="text__center">Doughnuts</h3>
-          </li>
-          <li
-            onClick={() => {
-              navigate("/shop/#cupcakes");
-            }}
-            className="home__categories-item"
-          >
-            <img
-              className="home__categories-img"
-              src="/candies/cupcakes/fruity.jpg"
-              alt="cupcake"
-            />
-            <h3 className="text__center">Cupcakes</h3>
-          </li>
-        </ul>
-      </section>
+      <TopProducts />
     </div>
   );
 };
