@@ -62,10 +62,15 @@ export const Product = ({ _id, name, rating, category, price, image }) => {
 
   return (
     <div className="product " id={category}>
-      <img className="product__img" src={image} alt="A violet candy" />
+      <img
+        onClick={() => navigate(`/products/${_id}`)}
+        className="product__img"
+        src={image}
+        alt="A violet candy"
+      />
       <div className="product__body flex">
         <div className="product__header flex">
-          <h3>{name}</h3>
+          <h3 onClick={() => navigate(`/products/${_id}`)}>{name}</h3>
           {wishlists && wishlists.find((wishlist) => wishlist._id === _id) ? (
             <button
               className="product__wishlist-btn"

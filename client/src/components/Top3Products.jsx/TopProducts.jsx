@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useProductsContext } from "../../contexts/products.context";
+import { fetchProducts } from "../../actions/products.action";
 import "./TopProducts.css";
 export const TopProducts = () => {
   const navigate = useNavigate();
-  const { state } = useProductsContext();
-  const products = state.products;
+
   const [top3Products, setTop3Products] = useState([]);
 
-  const topProducts = () => {
+  const topProducts = async () => {
+    const products = await fetchProducts();
     const sortedProducts = products.sort((a, b) => b.rating - a.rating);
     setTop3Products(sortedProducts.slice(0, 3));
   };

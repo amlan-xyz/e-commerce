@@ -116,3 +116,8 @@ button:hover {
   padding: 0.7rem 1rem;
   width: 100%;
 }
+
+.align {
+  display: flex;
+  align-items: center;
+}

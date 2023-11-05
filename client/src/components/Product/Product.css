@@ -24,6 +24,10 @@
   text-wrap: wrap;
 }
 
+.product__header h3:hover {
+  text-decoration: underline;
+}
+
 .product__wishlist-btn {
   background: none;
   border: none;

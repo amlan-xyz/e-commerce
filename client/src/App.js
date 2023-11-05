@@ -22,11 +22,15 @@ import { RequiresAuth } from "./utils/auth";
 
 import { useCartContext } from "./contexts/cart.context";
 
+import { fetchProducts } from "./actions/products.action";
 import { Footer } from "./components/Footer/Footer";
+import { useProductsContext } from "./contexts/products.context";
 import { useWishlistContenxt } from "./contexts/wishlist.context";
 import { Checkout } from "./pages/Checkout/Checkout";
+import { ProductDetail } from "./pages/ProductDetails/ProductDetails";
 function App() {
   const { dispatch } = useAuthContext();
+  const productsContext = useProductsContext();
   const wishlistContext = useWishlistContenxt();
   const cartContext = useCartContext();
   const getUserDetails = async () => {
@@ -43,8 +47,14 @@ function App() {
     }
   };
 
+  const getProducts = async () => {
+    const products = await fetchProducts();
+    productsContext.dispatch({ type: "FETCH_PRODUCTS", payload: products });
+  };
+
   useEffect(() => {
     getUserDetails();
+    getProducts();
   }, []);
 
   return (
@@ -54,6 +64,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Products />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
           <Route
             path="/cart"
             element={
