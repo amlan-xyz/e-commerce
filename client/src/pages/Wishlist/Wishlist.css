@@ -7,7 +7,7 @@
 }
 
 .wishlist {
-  margin-top: 3rem;
+  margin-top: 2rem;
   display: grid;
   grid-template-columns: repeat(4, auto);
   column-gap: 2rem;

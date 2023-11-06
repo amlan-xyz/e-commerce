@@ -31,7 +31,9 @@ export const Wishlist = () => {
             <Loader />
           ) : (
             <div className="wishlist__body">
-              <h1 className="text__center">Wishlist</h1>
+              <h1 className="text__center">
+                My Wishlist ({state.wishlist.length}){" "}
+              </h1>
               <ul className="wishlist">
                 {state.wishlist &&
                   state.wishlist.map((item) => {
