@@ -80,19 +80,8 @@ export const Products = () => {
       </div>
       <div className="products__body">
         <div className="products__heading">
-          <h2>/ Our products </h2>
           <div className="products__heading-body">
-            <div className="search__bar">
-              <AiOutlineSearch />
-              <input
-                type="text"
-                onChange={(e) =>
-                  dispatch({ type: "SEARCH", payload: e.target.value })
-                }
-                value={state.searchQuery}
-                placeholder="Search....."
-              />
-            </div>
+            <h2>/ Our products </h2>
             <button
               onClick={() => setShowFilter(true)}
               id="show-sidebar"
@@ -101,9 +90,20 @@ export const Products = () => {
               Filters
             </button>
           </div>
+          <div className="search__bar">
+            <AiOutlineSearch />
+            <input
+              type="text"
+              onChange={(e) =>
+                dispatch({ type: "SEARCH", payload: e.target.value })
+              }
+              value={state.searchQuery}
+              placeholder="Search....."
+            />
+          </div>
         </div>
-        <div className="products__content">
-          <ul className="products__list grid">
+        <div className="products__content ">
+          <ul className="products__list">
             {state.filteredProducts.map((product) => (
               <li key={product._id} className="products__list-item">
                 <Product {...product} />
