@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 const backend_api = "https://e-commerce-backend.theweird0ne.repl.co/users";
 
 export const loginUser = async (credentials) => {
@@ -12,8 +13,10 @@ export const loginUser = async (credentials) => {
     });
     const { data } = await response.json();
     localStorage.setItem("token", data.token);
+    toast.success("Login successful");
     return data.user;
   } catch (error) {
+    toast.error("Login failed");
     console.log(error);
   }
 };
@@ -30,8 +33,10 @@ export const signupUser = async (userData) => {
     });
     const { data } = await response.json();
     localStorage.setItem("token", data.token);
+    toast.success("Signup successful");
     return data.user;
   } catch (error) {
+    toast.error("Signup failed");
     console.error(error);
   }
 };

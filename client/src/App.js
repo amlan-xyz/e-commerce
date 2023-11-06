@@ -22,6 +22,8 @@ import { RequiresAuth } from "./utils/auth";
 
 import { useCartContext } from "./contexts/cart.context";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { fetchProducts } from "./actions/products.action";
 import { Footer } from "./components/Footer/Footer";
 import { useProductsContext } from "./contexts/products.context";
@@ -61,6 +63,13 @@ function App() {
     <div className="main">
       <Navbar />
       <div className="main__container">
+        <ToastContainer
+          position="bottom-right"
+          autoClose="400"
+          closeOnClick="true"
+          draggable="true"
+          borderRadius="10px"
+        />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Products />} />

@@ -1,0 +1,29 @@
+.empty {
+  max-width: 600px;
+  aspect-ratio: 1;
+  box-shadow: var(--shadow);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+}
+
+.empty__img {
+  max-width: 600px;
+  height: 300px;
+  margin-bottom: 1rem;
+}
+
+.empty__btn {
+  width: max-content;
+  background-color: var(--primary-color);
+  box-shadow: var(--shadow-alt);
+  padding: 0.5rem 1rem;
+  border: none;
+}
+
+.empty__text {
+  margin-bottom: 1rem;
+}

@@ -9,6 +9,7 @@ import {
 import { BiLogIn, BiLogOut } from "react-icons/bi";
 import { FaBars, FaCandyCane } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useAuthContext } from "../../contexts/auth.context";
 import { useCartContext } from "../../contexts/cart.context";
 import { useWishlistContenxt } from "../../contexts/wishlist.context";
@@ -32,6 +33,7 @@ export const Navbar = () => {
     localStorage.removeItem("token");
     state.isLoggedIn = false;
     state.user = null;
+    toast.success("Logout successful");
     hideNav();
   };
 

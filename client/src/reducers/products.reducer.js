@@ -1,10 +1,17 @@
 export const productsReducer = (state, action) => {
   switch (action.type) {
+    case "PRODUCTS_LOADING": {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
     case "FETCH_PRODUCTS":
       return {
         ...state,
         products: action.payload,
         filteredProducts: action.payload,
+        loading: false,
       };
     case "SEARCH":
       return {
@@ -28,7 +35,7 @@ export const productsReducer = (state, action) => {
         ...state,
         priceRange: action.payload,
         filteredProducts: state.products.filter(
-          ({ price }) => price >= action.payload
+          ({ price }) => price <= action.payload
         ),
       };
     case "FILTER_BY_RATING":

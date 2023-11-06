@@ -23,6 +23,7 @@ export const Sidebar = () => {
               type: "FILTER_BY_PRICE_RANGE",
               payload: e.target.value,
             });
+            console.log(e.target.value);
           }}
         />
         <datalist id="markers">

@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 const url = "https://e-commerce-backend.theweird0ne.repl.co/wishlist";
 
 export const addToWishlist = async (productId) => {
@@ -10,9 +11,11 @@ export const addToWishlist = async (productId) => {
     });
     const { data } = await response.json();
     if (response.status === 200) {
+      toast.success("Added to wishlist");
       return data;
     }
   } catch (error) {
+    toast.error("Failed to add item");
     console.error(error);
   }
 };
@@ -40,8 +43,10 @@ export const deleteItemFromWishlist = async (productId) => {
       },
     });
     const { data } = await response.json();
+    toast.success("Item removed ");
     return data;
   } catch (error) {
+    toast.error("Failed to remove item");
     console.error(error);
   }
 };

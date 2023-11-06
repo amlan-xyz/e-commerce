@@ -6,6 +6,7 @@ const CartContext = createContext();
 
 const initialState = {
   cart: [],
+  loading: false,
 };
 
 export const CartProvider = ({ children }) => {

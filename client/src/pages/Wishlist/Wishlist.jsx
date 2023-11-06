@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { fetchWishlist } from "../../actions/wishlist.action";
-import { useWishlistContenxt } from "../../contexts/wishlist.context";
-
+import { EmptyWishlist } from "../../components/Empty/Empty";
+import { Loader } from "../../components/Loader/Loader";
 import { Product } from "../../components/Product/Product";
+import { useWishlistContenxt } from "../../contexts/wishlist.context";
 import "./Wishlist.css";
 
 export const Wishlist = () => {
@@ -19,25 +20,33 @@ export const Wishlist = () => {
   }, []);
 
   return (
-    <div className="wishlist__container">
-      {state.loading === true ? (
-        "Loading..."
+    <>
+      {state.wishlist && state.wishlist.length === 0 ? (
+        <div className="div__center">
+          <EmptyWishlist />
+        </div>
       ) : (
-        <div className="wishlist__body">
-          <h1 className="text__center">Wishlist Page</h1>
-          <ul className="wishlist">
-            {state.wishlist &&
-              state.wishlist.map((item) => {
-                const { _id } = item;
-                return (
-                  <li className="" key={_id}>
-                    <Product {...item} />
-                  </li>
-                );
-              })}
-          </ul>
+        <div className="wishlist__container">
+          {state.loading === true ? (
+            <Loader />
+          ) : (
+            <div className="wishlist__body">
+              <h1 className="text__center">Wishlist</h1>
+              <ul className="wishlist">
+                {state.wishlist &&
+                  state.wishlist.map((item) => {
+                    const { _id } = item;
+                    return (
+                      <li className="" key={_id}>
+                        <Product {...item} />
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
+          )}
         </div>
       )}
-    </div>
+    </>
   );
 };

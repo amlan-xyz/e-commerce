@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 const url = "https://e-commerce-backend.theweird0ne.repl.co/carts";
 
 export const fetchCart = async () => {
@@ -8,6 +9,7 @@ export const fetchCart = async () => {
       },
     });
     const { data } = await response.json();
+
     return data;
   } catch (error) {
     console.error(error);
@@ -24,8 +26,10 @@ export const addToCart = async (productId) => {
       },
     });
     const { data } = await response.json();
+    toast.success("Item added to cart");
     return data;
   } catch (error) {
+    toast.error("Failed to add item");
     console.error(error);
   }
 };
@@ -39,8 +43,10 @@ export const removeFromCart = async (itemId) => {
       },
     });
     const { data } = await response.json();
+    toast.success("Item removed from cart");
     return data;
   } catch (error) {
+    toast.error("Failed to remove item");
     console.error(error);
   }
 };

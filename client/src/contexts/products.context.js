@@ -13,6 +13,7 @@ const initialState = {
   priceRange: 0,
   rating: 0,
   category: "",
+  loading: false,
 };
 
 export const ProductsProvider = ({ children }) => {
