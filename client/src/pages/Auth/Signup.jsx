@@ -10,6 +10,14 @@ export const Signup = () => {
   const { dispatch } = useAuthContext();
   const [form, setForm] = useState([]);
 
+  const [passwordType, setPasswordType] = useState("password");
+
+  const togglePasswordVisibility = () => {
+    setPasswordType((prevType) =>
+      prevType === "password" ? "text" : "password"
+    );
+  };
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -97,9 +105,19 @@ export const Signup = () => {
           </div>
 
           <div className="auth__item">
-            <label htmlFor="password">Password</label>
+            <label className="show__password" htmlFor="password">
+              <span>Password</span>
+              <div>
+                <label htmlFor="show-password">Show password</label>
+                <input
+                  type="checkbox"
+                  onChange={togglePasswordVisibility}
+                  id="show-password"
+                />
+              </div>
+            </label>
             <input
-              type="password"
+              type={passwordType}
               id="password"
               placeholder="Enter a strong password"
               onChange={(e) => {

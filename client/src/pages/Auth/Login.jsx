@@ -15,6 +15,13 @@ export const Login = () => {
   const { dispatch } = useAuthContext();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordType, setPasswordType] = useState("password");
+
+  const togglePasswordVisibility = () => {
+    setPasswordType((prevType) =>
+      prevType === "password" ? "text" : "password"
+    );
+  };
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -56,15 +63,26 @@ export const Login = () => {
             />
           </div>
           <div className="auth__item">
-            <label htmlFor="password">Password</label>
+            <label className="show__password" htmlFor="password">
+              <span>Password</span>
+              <div>
+                <label htmlFor="show-password">Show password</label>
+                <input
+                  type="checkbox"
+                  onChange={togglePasswordVisibility}
+                  id="show-password"
+                />
+              </div>
+            </label>
             <input
-              type="text"
+              type={passwordType}
               id="password"
               placeholder="password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
             />
           </div>
+
           <div className="auth__item ">
             <button className="submit__btn" type="submit">
               Login

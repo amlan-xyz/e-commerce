@@ -45,3 +45,16 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.show__password {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.show__password div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+}

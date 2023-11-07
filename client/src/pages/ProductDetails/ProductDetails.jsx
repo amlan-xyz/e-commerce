@@ -19,6 +19,7 @@ export const ProductDetail = () => {
   const productContext = useProductsContext();
   const products = productContext.state.products;
   const [product, setProduct] = useState({});
+
   const findProduct = () => {
     const product = products.find(({ _id }) => _id === id);
     setProduct({ ...product });
@@ -72,7 +73,7 @@ export const ProductDetail = () => {
 
   useEffect(() => {
     findProduct();
-  }, []);
+  }, [cartContext.dispatch, cartContext.dispatch]);
 
   return (
     <div className="item__container">
