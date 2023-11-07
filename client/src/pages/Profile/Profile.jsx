@@ -5,7 +5,6 @@ export const Profile = () => {
   const { state } = useAuthContext();
 
   const user = state.user;
-
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("token");

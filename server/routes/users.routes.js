@@ -57,7 +57,7 @@ router.post("/signup", async (req, res) => {
             token,
             user: {
               username: newUser.username,
-              name: newUser.username,
+              name: newUser.name,
               phoneNumber: newUser.phoneNumber,
               address: newUser.address,
               email: newUser.email,
@@ -102,7 +102,7 @@ router.post("/login", async (req, res) => {
             token,
             user: {
               username: loggedInUser.username,
-              name: loggedInUser.username,
+              name: loggedInUser.name,
               phoneNumber: loggedInUser.phoneNumber,
               address: loggedInUser.address,
               email: loggedInUser.email,
