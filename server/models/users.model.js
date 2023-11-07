@@ -29,10 +29,7 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    profilePicture: {
-      type: String,
-      required: true,
-    },
+
     cart: [
       {
         quantity: {

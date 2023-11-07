@@ -106,7 +106,6 @@ router.post("/login", async (req, res) => {
               phoneNumber: loggedInUser.phoneNumber,
               address: loggedInUser.address,
               email: loggedInUser.email,
-              profilePicture: loggedInUser.profilePicture,
             },
           },
         });
@@ -133,7 +132,6 @@ router.get("/profile", authVerify, async (req, res) => {
             phoneNumber: user.phoneNumber,
             address: user.address,
             email: user.email,
-            profilePicture: user.profilePicture,
           },
         },
       });

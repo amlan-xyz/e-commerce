@@ -4,15 +4,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/users.model");
 
 const signup = async (userDetails) => {
-  const {
-    email,
-    username,
-    password,
-    name,
-    address,
-    phoneNumber,
-    profilePicture,
-  } = userDetails;
+  const { email, username, password, name, address, phoneNumber } = userDetails;
   try {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
@@ -23,7 +15,6 @@ const signup = async (userDetails) => {
       password: hashedPassword,
       address,
       phoneNumber,
-      profilePicture,
     };
     const user = new User(newUser);
     await user.save();

@@ -95,21 +95,7 @@ export const Signup = () => {
               value={form.phoneNumber}
             />
           </div>
-          <div className="auth__item">
-            <label htmlFor="profilePicture">Profile Picture</label>
-            <input
-              type="text"
-              id="profilePicture"
-              placeholder="Enter a URL to your profile picture"
-              onChange={(e) => {
-                setForm((form) => ({
-                  ...form,
-                  profilePicture: e.target.value,
-                }));
-              }}
-              value={form.profilePicture}
-            />
-          </div>
+
           <div className="auth__item">
             <label htmlFor="password">Password</label>
             <input
