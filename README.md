@@ -28,6 +28,9 @@ $npm start
 11. Checkout
 
 ## Built using -
+  - MongoDb
+  - ExpressJs
   - React JS
+  - NodeJs
   - Vanilla CSS
 
