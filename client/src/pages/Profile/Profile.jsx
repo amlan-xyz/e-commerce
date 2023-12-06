@@ -84,8 +84,8 @@ export const Profile = () => {
       </div>
       {addressForm && (
         <div className="modal">
-          <div className="modal_wrapper"></div>
-          <div className="modal_container">
+          <div className="modal__wrapper"></div>
+          <div className="modal__container">
             <div className="address__form-header">
               <h3>Add New Address</h3>
               <button

@@ -7,7 +7,7 @@
   min-height: 90vh;
 }
 
-.modal_wrapper {
+.modal__wrapper {
   position: fixed;
   left: 0;
   right: 0;
@@ -16,7 +16,7 @@
   background-color: rgba(189, 189, 189, 0.9);
 }
 
-.modal_container {
+.modal__container {
   position: fixed;
   width: 30rem;
   top: 50%;

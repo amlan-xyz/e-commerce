@@ -79,8 +79,8 @@ export const Checkout = () => {
       </div>
       {showMenu && (
         <div className="modal">
-          <div className="modal_wrapper"></div>
-          <div className="modal_container">
+          <div className="modal__wrapper"></div>
+          <div className="modal__container">
             <div className="address__menu-header">
               <h3>Select Address</h3>
               <button className="close__btn" onClick={() => setMenu(!showMenu)}>
