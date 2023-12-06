@@ -39,6 +39,7 @@
   background-color: var(--primary-color);
   border: none;
   box-shadow: var(--shadow-alt);
+  width: 130px;
 }
 
 .product__cart-btn--alt {
@@ -49,10 +50,16 @@
   box-shadow: var(--shadow-alt);
   color: var(--accent-color);
   font-weight: 600;
+  width: 130px;
 }
 
 .product__body small {
   display: flex;
   align-items: center;
   gap: 0.2rem;
+}
+
+.product__btns {
+  display: flex;
+  justify-content: space-between;
 }

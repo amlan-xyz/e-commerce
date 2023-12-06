@@ -52,6 +52,10 @@ export const Product = ({ _id, name, rating, category, price, image }) => {
     cartContext.dispatch({ type: "FETCH_CART", payload: cart });
   };
 
+  const handleBuyNow = () => {
+    navigate(`/buy-now/${_id}`);
+  };
+
   useEffect(() => {
     getCart();
   }, [cartContext.dispatch]);
@@ -93,18 +97,26 @@ export const Product = ({ _id, name, rating, category, price, image }) => {
           {rating} <AiFillStar className="fill__primary" /> | {category}
         </small>
         <p>&#8377; {price}</p>
-        {carts && carts.find((cart) => cart.item._id === _id) ? (
-          <button
-            className="product__cart-btn--alt"
-            onClick={() => navigate("/cart")}
-          >
-            View Cart
+        <div className="product__btns">
+          {carts && carts.find((cart) => cart.item._id === _id) ? (
+            <button
+              className="product__cart-btn--alt"
+              onClick={() => navigate("/cart")}
+            >
+              View Cart
+            </button>
+          ) : (
+            <button
+              className="product__cart-btn"
+              onClick={() => handleCart(_id)}
+            >
+              Add to cart
+            </button>
+          )}
+          <button onClick={handleBuyNow} className="product__cart-btn--alt">
+            Buy Now
           </button>
-        ) : (
-          <button className="product__cart-btn" onClick={() => handleCart(_id)}>
-            Add to cart
-          </button>
-        )}
+        </div>
       </div>
     </div>
   );

@@ -28,6 +28,9 @@
 
 .delivery__body {
   margin-top: 1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
 .delivery__body p {
@@ -37,6 +40,26 @@
 
 .checkout__body button {
   margin-top: 1rem;
+}
+
+.address__menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.menu__list {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.menu__item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
 @media (max-width: 350px) {

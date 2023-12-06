@@ -28,6 +28,7 @@ import { fetchProducts } from "./actions/products.action";
 import { Footer } from "./components/Footer/Footer";
 import { useProductsContext } from "./contexts/products.context";
 import { useWishlistContenxt } from "./contexts/wishlist.context";
+import { BuyNow } from "./pages/BuyNow/BuyNow";
 import { Checkout } from "./pages/Checkout/Checkout";
 import { ProductDetail } from "./pages/ProductDetails/ProductDetails";
 function App() {
@@ -103,6 +104,14 @@ function App() {
             element={
               <RequiresAuth>
                 <Checkout />
+              </RequiresAuth>
+            }
+          />
+          <Route
+            path="/buy-now/:id"
+            element={
+              <RequiresAuth>
+                <BuyNow />
               </RequiresAuth>
             }
           />

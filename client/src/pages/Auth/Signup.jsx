@@ -25,6 +25,7 @@ export const Signup = () => {
     e.preventDefault();
     const user = await signupUser({ ...form });
     dispatch({ type: "LOGIN", payload: user });
+    navigate(location?.state?.from?.pathname || "/");
     setForm([]);
   };
 
@@ -79,18 +80,7 @@ export const Signup = () => {
               value={form.username}
             />
           </div>
-          <div className="auth__item">
-            <label htmlFor="address">Address</label>
-            <input
-              type="text"
-              id="address"
-              placeholder="Enter your mailing address"
-              onChange={(e) => {
-                setForm((form) => ({ ...form, address: e.target.value }));
-              }}
-              value={form.address}
-            />
-          </div>
+
           <div className="auth__item">
             <label htmlFor="phone">Phone Number</label>
             <input

@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/users.model");
 
 const signup = async (userDetails) => {
-  const { email, username, password, name, address, phoneNumber } = userDetails;
+  const { email, username, password, name, phoneNumber } = userDetails;
   try {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
@@ -13,7 +13,6 @@ const signup = async (userDetails) => {
       username,
       name,
       password: hashedPassword,
-      address,
       phoneNumber,
     };
     const user = new User(newUser);
@@ -79,6 +78,33 @@ const getAllUsers = async () => {
   }
 };
 
+const addAddress = async (userId, addressBody) => {
+  const { house_no, city, state, country, pin_code } = addressBody;
+  try {
+    const newAddress = { house_no, city, state, country, pin_code };
+    const user = await User.findById(userId);
+    user.address.push(newAddress);
+    await user.save();
+    return user;
+  } catch (error) {
+    console.error("Error adding new address", error);
+  }
+};
+
+const deleteAddress = async (userId, addressId) => {
+  try {
+    const user = await User.findById(userId);
+    const updatedAddress = user.address.filter(
+      ({ _id }) => _id.toString() !== addressId
+    );
+    user.address = updatedAddress;
+    await user.save();
+    return user;
+  } catch (error) {
+    console.error("Error deleting address", error);
+  }
+};
+
 module.exports = {
   signup,
   getAllUsers,
@@ -86,4 +112,6 @@ module.exports = {
   changeUserDetails,
   getUserById,
   deleteUserById,
+  addAddress,
+  deleteAddress,
 };

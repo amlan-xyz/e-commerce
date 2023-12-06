@@ -1,5 +1,7 @@
 import { toast } from "react-toastify";
-const url = "https://e-commerce-backend.theweird0ne.repl.co/wishlist";
+import { BASE_URL } from "../utils/baseUrl";
+
+const url = `${BASE_URL}/wishlist`;
 
 export const addToWishlist = async (productId) => {
   try {

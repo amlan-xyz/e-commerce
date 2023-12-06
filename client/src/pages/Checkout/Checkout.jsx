@@ -1,21 +1,16 @@
 import { useState } from "react";
-import { v4 as uuid } from "uuid";
+import { FiRotateCcw } from "react-icons/fi";
+import { IoMdClose } from "react-icons/io";
+import { useAuthContext } from "../../contexts/auth.context";
 import { useCartContext } from "../../contexts/cart.context";
 import "./Checkout.css";
-
 export const Checkout = () => {
   const cartContext = useCartContext();
   const cart = cartContext.state.cart;
-
-  const [address, setAddress] = useState([
-    {
-      _id: uuid(),
-      address: "123 Main City",
-      landmark: "Near City Hall",
-      pinCode: 980988,
-      city: "West Side of Sea",
-    },
-  ]);
+  const userContext = useAuthContext();
+  const allAddress = userContext.state.user.address;
+  const [address, setAddress] = useState(allAddress ? allAddress[0] : null);
+  const [showMenu, setMenu] = useState(false);
 
   return (
     <div className="checkout__container">
@@ -68,20 +63,60 @@ export const Checkout = () => {
         <hr />
         <h3>Deliver To</h3>
         <hr />
-        <ul className="delivery__body">
-          {" "}
-          {address.map(({ _id, address, landmark, pinCode, city }) => (
-            <li key={_id}>
-              <p>
-                {address}, {landmark}
-              </p>
-              <p>Pincode:{pinCode}</p>
-              <p>{city}</p>
-            </li>
-          ))}
-        </ul>
+        <div className="delivery__body">
+          <div className="delivery__item" key={address._id}>
+            <p>{address.house_no}</p>
+            <p>
+              {address.city}, {address.state}, {address.country}
+            </p>
+            <p>Pincode:{address.pin_code}</p>
+          </div>
+          <button onClick={() => setMenu(true)} className="link__btn">
+            <FiRotateCcw />
+          </button>
+        </div>
         <button className="primary__btn">Place Order</button>
       </div>
+      {showMenu && (
+        <div className="modal">
+          <div className="modal_wrapper"></div>
+          <div className="modal_container">
+            <div className="address__menu-header">
+              <h3>Select Address</h3>
+              <button className="close__btn" onClick={() => setMenu(!showMenu)}>
+                <IoMdClose />
+              </button>
+            </div>
+            <hr />
+            <ul className="menu__list">
+              {allAddress?.map((item) => {
+                const { house_no, city, state, country, pin_code } = item;
+                return (
+                  <>
+                    <li className="menu__item">
+                      <label htmlFor="address">
+                        <p>{house_no}</p>
+                        <p>
+                          {city}, {state}, {country}
+                        </p>
+                        <p>Pincode:{pin_code}</p>
+                      </label>
+                      <input
+                        type="radio"
+                        onChange={() => {
+                          setAddress(item);
+                          setMenu(!showMenu);
+                        }}
+                      />
+                    </li>
+                    <hr />
+                  </>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,5 +1,8 @@
 import { toast } from "react-toastify";
-const url = "https://e-commerce-backend.theweird0ne.repl.co/carts";
+
+import { BASE_URL } from "../utils/baseUrl";
+
+const url = `${BASE_URL}/carts`;
 
 export const fetchCart = async () => {
   try {

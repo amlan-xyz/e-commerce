@@ -32,11 +32,11 @@ export const Wishlist = () => {
           ) : (
             <div className="wishlist__body">
               <h1 className="text__center">
-                My Wishlist ({state.wishlist.length}){" "}
+                My Wishlist ({state.wishlist?.length}){" "}
               </h1>
               <ul className="wishlist">
                 {state.wishlist &&
-                  state.wishlist.map((item) => {
+                  state.wishlist?.map((item) => {
                     const { _id } = item;
                     return (
                       <li className="" key={_id}>

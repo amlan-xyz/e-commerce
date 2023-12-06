@@ -17,6 +17,8 @@ const {
   changeUserDetails,
   getUserById,
   deleteUserById,
+  addAddress,
+  deleteAddress,
 } = require("../utils/users.functions");
 
 router.get("", async (req, res) => {
@@ -55,14 +57,7 @@ router.post("/signup", async (req, res) => {
           message: "Signup successful",
           data: {
             token,
-            user: {
-              username: newUser.username,
-              name: newUser.name,
-              phoneNumber: newUser.phoneNumber,
-              address: newUser.address,
-              email: newUser.email,
-              profilePicture: newUser.profilePicture,
-            },
+            user: newUser,
           },
         });
       } else {
@@ -100,13 +95,7 @@ router.post("/login", async (req, res) => {
           message: "Logged In",
           data: {
             token,
-            user: {
-              username: loggedInUser.username,
-              name: loggedInUser.name,
-              phoneNumber: loggedInUser.phoneNumber,
-              address: loggedInUser.address,
-              email: loggedInUser.email,
-            },
+            user: loggedInUser,
           },
         });
       } else {
@@ -125,15 +114,7 @@ router.get("/profile", authVerify, async (req, res) => {
     if (user) {
       res.status(200).json({
         message: "User found",
-        data: {
-          user: {
-            username: user.username,
-            name: user.username,
-            phoneNumber: user.phoneNumber,
-            address: user.address,
-            email: user.email,
-          },
-        },
+        data: user,
       });
     } else {
       res.status(404).json({ message: "User not found" });
@@ -150,16 +131,7 @@ router.get("/:id", async (req, res) => {
     if (user) {
       res.status(200).json({
         message: "User found",
-        data: {
-          user: {
-            username: user.username,
-            name: user.username,
-            phoneNumber: user.phoneNumber,
-            address: user.address,
-            email: user.email,
-            profilePicture: user.profilePicture,
-          },
-        },
+        data: user,
       });
     } else {
       res.status(404).json({ message: "User not found" });
@@ -194,6 +166,36 @@ router.post("/:id/update", async (req, res) => {
         .json({ message: "User details updated", data: updatedUser });
     } else {
       res.status(400).json({ message: "User details updation failed" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Interanl Server Error", error });
+  }
+});
+
+router.post("/:id/address/add", async (req, res) => {
+  const userId = req.params.id;
+  const addressBody = req.body;
+  try {
+    const updatedUser = await addAddress(userId, addressBody);
+    if (updatedUser) {
+      res.status(200).json({ message: "Address added", data: updatedUser });
+    } else {
+      res.status(400).json({ message: "Failed to add address" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Interanl Server Error", error });
+  }
+});
+
+router.post("/:user_id/address/:address_id/delete", async (req, res) => {
+  const userId = req.params.user_id;
+  const addressId = req.params.address_id;
+  try {
+    const updatedUser = await deleteAddress(userId, addressId);
+    if (updatedUser) {
+      res.status(200).json({ message: "Address added", data: updatedUser });
+    } else {
+      res.status(400).json({ message: "Failed to add address" });
     }
   } catch (error) {
     res.status(500).json({ message: "Interanl Server Error", error });

@@ -20,10 +20,15 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    address: {
-      type: String,
-      required: true,
-    },
+    address: [
+      {
+        house_no: String,
+        city: String,
+        state: String,
+        counry: String,
+        pin_code: String,
+      },
+    ],
     phoneNumber: {
       type: Number,
       required: true,

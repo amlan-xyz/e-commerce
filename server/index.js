@@ -9,11 +9,7 @@ app.use(express.json());
 //cors
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "http://192.168.0.101:3000",
-      "https://candyland-by-amlan.vercel.app",
-    ],
+    origin: ["http://localhost:3000", "https://candyland-by-amlan.vercel.app"],
   })
 );
 

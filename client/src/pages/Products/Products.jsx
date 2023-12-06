@@ -62,13 +62,14 @@ export const Products = () => {
               </div>
             </div>
             <div className="products__content ">
-              {state.filteredProducts && state.filteredProducts.length === 0 ? (
+              {state.filteredProducts &&
+              state.filteredProducts?.length === 0 ? (
                 <div className="div__center">
                   <EmptyProducts />
                 </div>
               ) : (
                 <ul className="products__list">
-                  {state.filteredProducts.map((product) => (
+                  {state.filteredProducts?.map((product) => (
                     <li key={product._id} className="products__list-item">
                       <Product {...product} />
                     </li>

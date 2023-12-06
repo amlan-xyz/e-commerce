@@ -1,4 +1,6 @@
-const backend_api = "https://e-commerce-backend.theweird0ne.repl.co";
+import { BASE_URL } from "../utils/baseUrl";
+
+const backend_api = `${BASE_URL}`;
 
 export const fetchProducts = async () => {
   try {

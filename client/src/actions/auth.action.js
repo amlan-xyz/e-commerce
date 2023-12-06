@@ -1,5 +1,7 @@
 import { toast } from "react-toastify";
-const backend_api = "https://e-commerce-backend.theweird0ne.repl.co/users";
+import { BASE_URL } from "../utils/baseUrl";
+
+const backend_api = `${BASE_URL}/users`;
 
 export const loginUser = async (credentials) => {
   try {
@@ -50,10 +52,43 @@ export const fetchUserProfile = async () => {
       },
     });
     const { data } = await response.json();
-    if (response.status === 200) {
-      return data.user;
-    }
+    return data;
   } catch (error) {
     console.error(error);
+  }
+};
+
+export const addNewAddress = async (userId, addressBody) => {
+  try {
+    const url = `${backend_api}/${userId}/address/add`;
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(addressBody),
+    });
+    const { data } = await response.json();
+    toast.success("Address added");
+    return data;
+  } catch (error) {
+    toast.error("Error adding address");
+  }
+};
+
+export const removeAddress = async (userId, addressId) => {
+  try {
+    const url = `${backend_api}/${userId}/address/${addressId}/delete`;
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const { data } = await response.json();
+    toast.success("Address removed");
+    return data;
+  } catch (error) {
+    toast.error("Error removing address");
   }
 };

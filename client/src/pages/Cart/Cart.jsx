@@ -62,7 +62,7 @@ export const Cart = () => {
         <Loader />
       ) : (
         <>
-          {state.cart && state.cart.length === 0 ? (
+          {state.cart && state.cart?.length === 0 ? (
             <EmptyCart />
           ) : (
             <>
@@ -70,7 +70,7 @@ export const Cart = () => {
               <div className="cart__container flex">
                 <ul className="cart__items">
                   {state.cart &&
-                    state.cart.map(({ _id, item, quantity }) => {
+                    state.cart?.map(({ _id, item, quantity }) => {
                       return (
                         <li className="cart__item flex" key={_id}>
                           <img
@@ -139,7 +139,7 @@ export const Cart = () => {
                     <h2>Cart Details</h2>
                     <hr />
                     <ul className="cart__details-items">
-                      {state.cart.map(({ _id, item, quantity }) => (
+                      {state.cart?.map(({ _id, item, quantity }) => (
                         <li key={_id} className="cart__details-item">
                           <p>
                             {" "}

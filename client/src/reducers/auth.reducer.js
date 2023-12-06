@@ -12,6 +12,18 @@ export const authReducer = (state, action) => {
         user: null,
         isLoggedIn: false,
       };
+    case "ADD_ADDRESS": {
+      return {
+        ...state,
+        user: action.payload,
+      };
+    }
+    case "REMOVE_ADDRESS": {
+      return {
+        ...state,
+        user: action.payload,
+      };
+    }
     default:
       return state;
   }

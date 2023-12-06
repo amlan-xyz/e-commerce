@@ -17,6 +17,54 @@
   margin-bottom: 1rem;
 }
 
+.address__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.address__container button {
+  padding: 0.2rem 0.5rem;
+  background-color: var(--background-color);
+  border: none;
+  font-size: 1.2rem;
+}
+
+.address__form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.address__form-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.address__form-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.address__form-item input {
+  padding: 0.3rem;
+}
+
+.address__list {
+  margin-bottom: 1rem;
+}
+
+.address__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+
 @media (max-width: 425px) {
   .profile__body {
     min-width: 300px;
