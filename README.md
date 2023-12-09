@@ -1,14 +1,7 @@
 ### [Candyland](https://candyland-by-amlan.vercel.app/) 
 
-Candyland is a e-commerce application built using ReactJS.
+E-Commerce web application with ReactJS for a smooth and responsive user interface, powered by Node.js and Express for efficient API handling that interacts with a MongoDB database and integrated with Razorpay for easy and secure transactions. 🚀
 
-## How to install and run locally ?
-
-```
-$git clone https://github.com/theweird0ne/e-commerce.git
-$npm install
-$npm start
-```
 ## Features -
 1. Landing Page
 2. Product Listing Page
@@ -34,3 +27,9 @@ $npm start
   - NodeJs
   - Vanilla CSS
 
+## How to install and run locally ?
+```
+$git clone https://github.com/theweird0ne/e-commerce.git
+$npm install
+$npm start
+```
