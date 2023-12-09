@@ -36,6 +36,11 @@ export const cartReducer = (state, action) => {
         }),
         loading: false,
       };
+    case "CONFIRM_ORDER":
+      return {
+        ...state,
+        cart: [],
+      };
     default:
       return state;
   }

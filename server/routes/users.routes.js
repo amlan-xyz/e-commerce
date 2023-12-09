@@ -72,7 +72,7 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
-  const user = await User.findOne({ username });
+  const user = await User.findOne({ username }).populate("orders");
 
   if (!user) {
     const msg = "Username Invalid";

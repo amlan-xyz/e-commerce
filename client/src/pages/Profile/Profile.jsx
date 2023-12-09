@@ -1,16 +1,17 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { IoMdAdd, IoMdClose } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router";
 import { addNewAddress, removeAddress } from "../../actions/auth.action";
 import { useAuthContext } from "../../contexts/auth.context";
+import { BASE_URL } from "../../utils/baseUrl";
 import "./Profile.css";
-
 export const Profile = () => {
   const { state, dispatch } = useAuthContext();
   const [addressForm, setAddressForm] = useState(false);
   const [form, setForm] = useState([]);
-
+  const [orders, setOrders] = useState([]);
   const user = state.user;
 
   const navigate = useNavigate();
@@ -32,6 +33,21 @@ export const Profile = () => {
     const updatedUser = await removeAddress(user._id, addressId);
     dispatch({ type: "REMOVE_ADDRESS", payload: updatedUser });
   };
+
+  const getOrders = async () => {
+    const {
+      data: { orders },
+    } = await axios.get(`${BASE_URL}/orders`, {
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
+    });
+    setOrders(orders);
+  };
+
+  useEffect(() => {
+    getOrders();
+  }, []);
 
   return (
     <div className="profile__container">
@@ -78,6 +94,27 @@ export const Profile = () => {
             </>
           ))}
         </ul>
+        <p>
+          {" "}
+          <b>Orders</b>
+        </p>
+        {orders.length !== 0 ? (
+          <ul className="address__list">
+            {orders?.map((order) => (
+              <>
+                <hr />
+                <li className="address__item" key={order._id}>
+                  <p>
+                    {order.order_item} x {order.order_quantity}
+                  </p>
+                  <p>Rs. {order.order_value}</p>
+                </li>
+              </>
+            ))}
+          </ul>
+        ) : (
+          <p>No orders found</p>
+        )}
         <button onClick={handleLogout} className="primary__btn">
           Logout
         </button>

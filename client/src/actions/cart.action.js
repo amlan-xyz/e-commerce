@@ -70,3 +70,20 @@ export const updateCart = async (itemId, value) => {
     console.error(error);
   }
 };
+
+export const confirmOrder = async (orderDetails) => {
+  try {
+    const response = await fetch("http://localhost:3001/orders/confirm", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: localStorage.getItem("token"),
+      },
+      body: JSON.stringify(orderDetails),
+    });
+    const { data } = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};

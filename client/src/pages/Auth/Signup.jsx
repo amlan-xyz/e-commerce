@@ -93,7 +93,6 @@ export const Signup = () => {
               value={form.phoneNumber}
             />
           </div>
-
           <div className="auth__item">
             <label className="show__password" htmlFor="password">
               <span>Password</span>

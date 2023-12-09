@@ -53,7 +53,7 @@ const changeUserDetails = async (userId, newUserDetails) => {
 
 const getUserById = async (userId) => {
   try {
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).populate("orders");
     return user;
   } catch (error) {
     console.error("User not found:", error);

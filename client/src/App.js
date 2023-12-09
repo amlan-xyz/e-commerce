@@ -30,15 +30,20 @@ import { useProductsContext } from "./contexts/products.context";
 import { useWishlistContenxt } from "./contexts/wishlist.context";
 import { BuyNow } from "./pages/BuyNow/BuyNow";
 import { Checkout } from "./pages/Checkout/Checkout";
+import {
+  PaymentConfirmed,
+  PaymentFailed,
+} from "./pages/PaymentConfirmation/Payment";
 import { ProductDetail } from "./pages/ProductDetails/ProductDetails";
 function App() {
-  const { dispatch } = useAuthContext();
+  const { isLoggedIn, dispatch } = useAuthContext();
   const productsContext = useProductsContext();
   const wishlistContext = useWishlistContenxt();
   const cartContext = useCartContext();
+
   const getUserDetails = async () => {
     const token = localStorage.getItem("token");
-    if (token) {
+    if (token && !isLoggedIn) {
       const user = await fetchUserProfile();
       if (user) {
         dispatch({ type: "LOGIN", payload: user });
@@ -104,6 +109,22 @@ function App() {
             element={
               <RequiresAuth>
                 <Checkout />
+              </RequiresAuth>
+            }
+          />
+          <Route
+            path="/payment/success"
+            element={
+              <RequiresAuth>
+                <PaymentConfirmed />
+              </RequiresAuth>
+            }
+          />
+          <Route
+            path="/payment/failed"
+            element={
+              <RequiresAuth>
+                <PaymentFailed />
               </RequiresAuth>
             }
           />
