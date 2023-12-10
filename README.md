@@ -1,6 +1,6 @@
 ### [Candyland](https://candyland-by-amlan.vercel.app/) 
 
-E-Commerce web application with ReactJS for a smooth and responsive user interface, powered by Node.js and Express for efficient API handling that interacts with a MongoDB database and integrated with Razorpay for easy and secure transactions. 🚀
+E-Commerce web application built with ReactJS for a smooth and responsive user interface, powered by Node.js and Express for efficient API handling that interacts with a MongoDB database and integrated with Razorpay for easy and secure transactions. 🚀
 
 ## Features -
 1. Landing Page
@@ -19,6 +19,7 @@ E-Commerce web application with ReactJS for a smooth and responsive user interfa
     - Login
     - Logout
 11. Checkout
+12. Razorpay Payment Gateway
 
 ## Built using -
   - MongoDb
