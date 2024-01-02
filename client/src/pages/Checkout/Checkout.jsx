@@ -7,8 +7,8 @@ import { addNewAddress } from "../../actions/auth.action";
 import { confirmOrder } from "../../actions/cart.action";
 import { useAuthContext } from "../../contexts/auth.context";
 import { useCartContext } from "../../contexts/cart.context";
+import { BASE_URL } from "../../utils/baseUrl";
 import "./Checkout.css";
-
 export const Checkout = () => {
   const cartContext = useCartContext();
   const cart = cartContext.state.cart;
@@ -30,14 +30,11 @@ export const Checkout = () => {
     discount;
 
   const initPay = async (data) => {
-    const response = await axios.get(
-      "http://localhost:3001/orders/razorpay-key",
-      {
-        headers: {
-          authorization: localStorage.getItem("token"),
-        },
-      }
-    );
+    const response = await axios.get(`${BASE_URL}/orders/razorpay-key`, {
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
+    });
     const options = {
       key: response.data.razorpay_key,
       amount: data.amount,
@@ -56,8 +53,7 @@ export const Checkout = () => {
       },
       handler: async (res) => {
         try {
-          console.log(res);
-          const verifyURL = "http://localhost:3001/orders/verify";
+          const verifyURL = `${BASE_URL}/orders/verify`;
           const response = await axios.post(
             verifyURL,
             { ...res },
