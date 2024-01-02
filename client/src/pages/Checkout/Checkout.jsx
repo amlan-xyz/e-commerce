@@ -89,7 +89,7 @@ export const Checkout = () => {
 
   const checkoutHanlder = async () => {
     try {
-      const orderURL = "http://localhost:3001/orders/checkout";
+      const orderURL = `${BASE_URL}/orders/checkout`;
       const { data } = await axios.post(
         orderURL,
         { amount: cartValue },

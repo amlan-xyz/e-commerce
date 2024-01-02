@@ -23,7 +23,6 @@ export const Product = ({ _id, name, rating, category, price, image }) => {
 
   const handleCart = async (productId) => {
     const data = await addToCart(productId);
-    console.log(data);
     cartContext.dispatch({ type: "ADD_TO_CART", payload: data });
   };
 
