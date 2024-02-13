@@ -2,33 +2,42 @@ import { AiFillHeart, AiFillStar, AiOutlineHeart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import "./Product.css";
 //context
+import { useAuthContext } from "../../contexts/auth.context";
 import { useCartContext } from "../../contexts/cart.context";
 import { useWishlistContenxt } from "../../contexts/wishlist.context";
 //actions
-import { useEffect } from "react";
-import { addToCart, fetchCart } from "../../actions/cart.action";
+import { addToCart } from "../../actions/cart.action";
 import {
   addToWishlist,
   deleteItemFromWishlist,
-  fetchWishlist,
 } from "../../actions/wishlist.action";
 
 export const Product = ({ _id, name, rating, category, price, image }) => {
   const navigate = useNavigate();
-
+  const { state } = useAuthContext();
   const cartContext = useCartContext();
   const carts = cartContext.state.cart;
   const wishlistContext = useWishlistContenxt();
   const wishlists = wishlistContext.state.wishlist;
 
   const handleCart = async (productId) => {
-    const data = await addToCart(productId);
-    cartContext.dispatch({ type: "ADD_TO_CART", payload: data });
+    if (state.isLoggedIn === false) {
+      navigate("/login");
+    } else {
+      cartContext.dispatch({ type: "CART_LOADING" });
+      const data = await addToCart(productId);
+      cartContext.dispatch({ type: "ADD_TO_CART", payload: data });
+    }
   };
 
   const handleWishlist = async (productId) => {
-    const item = addToWishlist(productId);
-    wishlistContext.dispatch({ type: "ADD_TO_WISHLIST", payload: item });
+    if (state.isLoggedIn === false) {
+      navigate("/login");
+    } else {
+      wishlistContext.dispatch({ type: "WISHLIST_LOADING" });
+      const item = addToWishlist(productId);
+      wishlistContext.dispatch({ type: "ADD_TO_WISHLIST", payload: item });
+    }
   };
 
   const removeFromWishlist = async (productId) => {
@@ -41,27 +50,13 @@ export const Product = ({ _id, name, rating, category, price, image }) => {
     });
   };
 
-  const getWishlist = async () => {
-    const wishlist = await fetchWishlist();
-    wishlistContext.dispatch({ type: "FETCH_WISHLIST", payload: wishlist });
-  };
-
-  const getCart = async () => {
-    const cart = await fetchCart();
-    cartContext.dispatch({ type: "FETCH_CART", payload: cart });
-  };
-
   const handleBuyNow = () => {
-    navigate(`/buy-now/${_id}`);
+    if (state.isLoggedIn === false) {
+      navigate("/login");
+    } else {
+      navigate(`/buy-now/${_id}`);
+    }
   };
-
-  useEffect(() => {
-    getCart();
-  }, [cartContext.dispatch]);
-
-  useEffect(() => {
-    getWishlist();
-  }, [wishlistContext.dispatch]);
 
   return (
     <div className="product " id={category}>

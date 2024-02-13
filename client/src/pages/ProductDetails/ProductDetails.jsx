@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useProductsContext } from "../../contexts/products.context";
 import "./ProductDetails.css";
 //context
+import { useAuthContext } from "../../contexts/auth.context";
 import { useCartContext } from "../../contexts/cart.context";
 import { useWishlistContenxt } from "../../contexts/wishlist.context";
 //actions
@@ -16,15 +17,10 @@ import {
 
 export const ProductDetail = () => {
   const { id } = useParams();
+  const { state } = useAuthContext();
   const productContext = useProductsContext();
   const products = productContext.state.products;
   const [product, setProduct] = useState({});
-
-  const findProduct = () => {
-    const product = products.find(({ _id }) => _id === id);
-    setProduct({ ...product });
-  };
-
   const navigate = useNavigate();
 
   const cartContext = useCartContext();
@@ -33,14 +29,21 @@ export const ProductDetail = () => {
   const wishlists = wishlistContext.state.wishlist;
 
   const handleCart = async (productId) => {
-    const data = await addToCart(productId);
-    console.log(data);
-    cartContext.dispatch({ type: "ADD_TO_CART", payload: data });
+    if (state.isLoggedIn === false) {
+      navigate("/login");
+    } else {
+      const data = await addToCart(productId);
+      cartContext.dispatch({ type: "ADD_TO_CART", payload: data });
+    }
   };
 
   const handleWishlist = async (productId) => {
-    const item = addToWishlist(productId);
-    wishlistContext.dispatch({ type: "ADD_TO_WISHLIST", payload: item });
+    if (state.isLoggedIn === false) {
+      navigate("/login");
+    } else {
+      const item = addToWishlist(productId);
+      wishlistContext.dispatch({ type: "ADD_TO_WISHLIST", payload: item });
+    }
   };
 
   const removeFromWishlist = async (productId) => {
@@ -53,27 +56,30 @@ export const ProductDetail = () => {
     });
   };
 
-  const getWishlist = async () => {
-    const wishlist = await fetchWishlist();
-    wishlistContext.dispatch({ type: "FETCH_WISHLIST", payload: wishlist });
-  };
-
-  const getCart = async () => {
-    const cart = await fetchCart();
-    cartContext.dispatch({ type: "FETCH_CART", payload: cart });
-  };
-
   useEffect(() => {
+    const getCart = async () => {
+      const cart = await fetchCart();
+      cartContext.dispatch({ type: "FETCH_CART", payload: cart });
+    };
     getCart();
-  }, [cartContext.dispatch]);
+  }, [cartContext]);
 
   useEffect(() => {
+    const getWishlist = async () => {
+      const wishlist = await fetchWishlist();
+      wishlistContext.dispatch({ type: "FETCH_WISHLIST", payload: wishlist });
+    };
+
     getWishlist();
-  }, [wishlistContext.dispatch]);
+  }, [wishlistContext]);
 
   useEffect(() => {
+    const findProduct = () => {
+      const product = products.find(({ _id }) => _id === id);
+      setProduct({ ...product });
+    };
     findProduct();
-  }, [cartContext.dispatch, cartContext.dispatch]);
+  }, [cartContext, cartContext, products, id]);
 
   return (
     <div className="item__container">

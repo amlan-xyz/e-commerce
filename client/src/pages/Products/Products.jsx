@@ -7,28 +7,53 @@ import { useProductsContext } from "../../contexts/products.context";
 import { fetchProducts } from "../../actions/products.action";
 
 //components
+import { fetchCart } from "../../actions/cart.action";
+import { fetchWishlist } from "../../actions/wishlist.action";
 import { EmptyProducts } from "../../components/Empty/Empty";
 import { Loader } from "../../components/Loader/Loader";
 import { Product } from "../../components/Product/Product";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
+import { useCartContext } from "../../contexts/cart.context";
+import { useWishlistContenxt } from "../../contexts/wishlist.context";
 import "./Products.css";
 
 export const Products = () => {
   const { state, dispatch } = useProductsContext();
+  const cartContext = useCartContext();
+  const wishlistContext = useWishlistContenxt();
   const [showFilter, setShowFilter] = useState(false);
-  const getProducts = async () => {
-    dispatch({ type: "PRODUCTS_LOADING" });
-    const products = await fetchProducts();
-    dispatch({ type: "FETCH_PRODUCTS", payload: products });
-  };
 
   useEffect(() => {
+    const getProducts = async () => {
+      dispatch({ type: "PRODUCTS_LOADING" });
+      const products = await fetchProducts();
+      dispatch({ type: "FETCH_PRODUCTS", payload: products });
+    };
     getProducts();
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    const getCart = async () => {
+      const cart = await fetchCart();
+      cartContext.dispatch({ type: "FETCH_CART", payload: cart });
+    };
+
+    getCart();
+  }, [cartContext, cartContext.state.cart]);
+
+  useEffect(() => {
+    const getWishlist = async () => {
+      const wishlist = await fetchWishlist();
+      wishlistContext.dispatch({ type: "FETCH_WISHLIST", payload: wishlist });
+    };
+    getWishlist();
+  }, [wishlistContext, wishlistContext.state.wishlist]);
 
   return (
     <section className="products__section">
-      {state.loading === true ? (
+      {state.loading === true ||
+      cartContext.state.loading === true ||
+      wishlistContext.state.loading === true ? (
         <Loader />
       ) : (
         <>

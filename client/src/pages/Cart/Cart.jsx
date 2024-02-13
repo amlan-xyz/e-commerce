@@ -27,12 +27,6 @@ export const Cart = () => {
 
   const navigate = useNavigate();
 
-  const getCart = async () => {
-    dispatch({ type: "CART_LOADING" });
-    const cart = await fetchCart();
-    dispatch({ type: "FETCH_CART", payload: cart });
-  };
-
   const removeCartItem = async (itemId) => {
     await removeFromCart(itemId);
     dispatch({ type: "REMOVE_FROM_CART", payload: itemId });
@@ -53,8 +47,13 @@ export const Cart = () => {
   };
 
   useEffect(() => {
+    const getCart = async () => {
+      dispatch({ type: "CART_LOADING" });
+      const cart = await fetchCart();
+      dispatch({ type: "FETCH_CART", payload: cart });
+    };
     getCart();
-  }, []);
+  }, [dispatch]);
 
   return (
     <section className="cart__section flex">
@@ -62,11 +61,11 @@ export const Cart = () => {
         <Loader />
       ) : (
         <>
-          {state.cart && state.cart?.length === 0 ? (
+          {state?.cart && state.cart?.length === 0 ? (
             <EmptyCart />
           ) : (
             <>
-              <h1 className="text__center">My Cart ({state.cart.length})</h1>
+              <h1 className="text__center">My Cart ({state?.cart?.length})</h1>
               <div className="cart__container flex">
                 <ul className="cart__items">
                   {state.cart &&

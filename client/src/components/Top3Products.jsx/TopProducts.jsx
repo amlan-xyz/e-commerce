@@ -10,12 +10,12 @@ export const TopProducts = () => {
   const topProducts = async () => {
     const products = await fetchProducts();
     const sortedProducts = products?.sort((a, b) => b.rating - a.rating);
-    setTop3Products(sortedProducts.slice(0, 3));
+    setTop3Products(sortedProducts?.slice(0, 3));
   };
 
   useEffect(() => {
     topProducts();
-  }, []);
+  }, [top3Products]);
 
   return (
     <section className="home__categories flex">
