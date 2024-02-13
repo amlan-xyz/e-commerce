@@ -15,7 +15,7 @@ E-Commerce web application built with ReactJS for a smooth and responsive user i
 7. Search
 8. Loding & Alerts
 9. Authentication
-    - Sing up
+    - Sign up
     - Login
     - Logout
 11. Checkout
